@@ -24,14 +24,14 @@ The Principles section below grounds every trigger. In your reply, name each pri
 - Anything beyond a fully specified small edit → the **grilling** skill before you build. Ask in rounds, one recommendation per question, until the design tree is empty. Facts you can look up or settle by running something are yours to find, never Jack's to answer (sketch them with the Prototype playbook). Do not start building until Jack confirms you share the understanding.
 - A new feature, core logic, or an architecture change → write it down. A product decision or a spec goes to `docs/specs/<feature>.md` via the **to-spec** skill. An architecture decision goes to `docs/adr/` and new terms to `GLOSSARY.md` via the **domain-modeling** skill (or run the **grill-with-docs** skill to do both while grilling). Small work, bug fixes, and refactors get no doc.
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
-- Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
+- Any code → read the **code-style** skill and its examples for the language first. Then name the data shape, and choose its organizing structure per **principle-model-the-domain**.
 - Code crossing a function boundary → the **architect** skill.
 - Parallel fan-out → the **swarm** skill for coverage, races, and exploration partitions. Use **arena** for design or code bakeoffs.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 4).
 - Shipping UI or a CLI → the **control-ui** skill (browser, Electron, web) or the **control-cli** skill (CLIs and TUIs). For bug fixes, reproduce first on the same surface yourself.
 - Claiming something works → the **verify-this** skill when the claim is load-bearing. Running a benchmark or reporting a speedup → the **benchmark-checklist** skill first.
 - Before each commit → the **deslop** skill.
-- Before the PR opens → the **no-comments** skill, then the **thermos** skill and the **spec-review** skill side by side. Fix every finding that holds up.
+- Before the PR opens → the **no-comments** skill, then the **thermos** skill, the **spec-review** skill, and the `style-reviewer` subagent side by side. Fix every finding that holds up.
 - Any prose surface, your reply included → the **unslop** skill. Docs, specs, PR descriptions, and commit messages → the **technical-writing** skill too.
 - TypeScript → the **typescript-best-practices** skill. Python → the **python-best-practices** skill.
 - Any PR-status request ("babysit this", "get it green", "check on the PR", "fix CI") → the **Babysit** playbook.
@@ -75,7 +75,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 - **Model the Domain.** Writing stateful logic, or code that branches a lot or repeats a shape assumption across files. Encode the domain in a structure (state machine, typed model, table or registry, reducer, boundary, the right collection) instead of scattered conditionals.
 - **Boundary Discipline.** Wiring validation, error handling, or framework adapters. Guards at system boundaries, trust internal types, keep business logic pure.
-- **Type System Discipline.** Designing types or a signature in any typed language. Make illegal states unrepresentable, brand primitives, parse external data at boundaries.
+- **Type System Discipline.** Designing types or a signature. Make illegal states hard to represent with plain types, and parse external data at boundaries.
 - **Make Operations Idempotent.** Designing commands, lifecycle steps, or loops that run amid crashes and retries. Converge to the same end state.
 - **Migrate Callers Then Delete Legacy APIs.** Introducing a new internal API while old callers exist. Migrate and delete in one wave.
 - **Separate Before Serializing Shared State.** Concurrent actors might write the same file, branch, key, or object. Eliminate the sharing first.
@@ -129,7 +129,7 @@ Every playbook ends with a reply written this way, with the PR link as `https://
 
 ## Comments
 
-Write code with no comments by default. Keep one only for a non-obvious *why* the code can't show. Prefer a better name, type, or structure over a comment. This is a practical rule, not an absolute one. Tests and scripts get no phase-narrating comments. The assertion or log string documents the step.
+Write code with no comments by default, per the **code-style** skill. Keep one only for a non-obvious *why* or a non-obvious location, with senior staff judgement. Split steps with blank lines, not comments. Big files get the section banners the **code-style** skill shows. Tests and scripts get no phase-narrating comments. The assertion or log string documents the step.
 
 ## Playbooks
 

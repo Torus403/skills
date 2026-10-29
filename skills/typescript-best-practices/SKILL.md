@@ -7,25 +7,22 @@ disable-model-invocation: true
 
 # TypeScript best practices
 
-Apply the **type-system-discipline** principle skill first.
+Read the **code-style** skill first. These rules add the TypeScript type rules on top of it. They favor plain, widely known TypeScript over clever type machinery, even when that means a little more code. Follow the repo's own `tsconfig`, linter, and formatter before anything here.
 
 | Rule | Summary |
 |------|---------|
-| Discriminated unions | Model variants with a `kind` literal discriminant so impossible states can't be represented. No optional-field bags. |
-| Branded types | Brand primitives with `& { readonly __brand: "X" }` so they can't be mixed up. Validate once at the boundary. A brand comes from a verifying type guard (`input is AgentId`), never from `as`. |
-| Constructive modeling | Build the shape so the illegal value can't be constructed. `[T, ...T[]]` for non-empty, `[T, T][]` for even length, `start` plus `duration` for a range. Not a runtime guard, not a wish for refinement types. |
-| Simplest total type | Keep `T[]` while every operation on it stays total. Strengthen to `NonEmpty<T>` only where the loose type forces `!`, a cast, or a "should never happen" throw. |
-| `unknown` over `any` | External data is `unknown`. |
-| Schemas before guards | Before hand-writing a property-by-property type guard, use the repository's runtime schema library and infer the type from the schema, such as `z.infer`. |
-| No `as` casts | Every `as` is a runtime crash waiting. Cast only after validation. |
-| Narrowing hierarchy | Discriminant switch > `in` operator > `typeof`/`instanceof` > user-defined type guard > `as`. |
-| Type guards | Must verify the claim. A lying guard is worse than `as` because the bug hides behind a name that says it's safe. Name them `isX` or `hasX`. |
-| Exhaustiveness | Inline `const _exhaustive: never = x;` in default arms so the compiler errors when a new variant is added. |
-| `satisfies` over `as` | Validates the value without widening literal types. |
-| Boundary validation | Parse where data crosses in, into a named domain type. `Record<string, unknown>` (however spelled) stops at that parse. Trust types inside. See the **boundary-discipline** principle skill. |
-| Schema-derived types | Reach for `Pick`/`Omit`/`Parameters`/`ReturnType`/`Awaited`/`typeof` before declaring a new interface. |
-| Object args | Pass objects, not positional, so argument order is self-documenting. Skip on hot paths (per-frame render, tokenizers, parsers). |
-| Real tests | Don't mock what you can run. Prefer the framework's real test primitives with leak/disposable checks, and verify UI in a running build. Mock only what you can't run locally. |
-| Structured telemetry | Prefer structured logger diagnostics with enough context to debug from an id. No `console.log` in shipped code. |
+| Strict mode | Work with `strict` on. Fix the error, don't silence it. |
+| `unknown` over `any` | External data is `unknown` until parsed. `any` turns the compiler off. |
+| Parse at the boundary | Where data crosses in (HTTP, `JSON.parse`, env, files, IPC), parse it once into a named type with the repo's schema library (such as `zod`), and trust the type inside. See the **boundary-discipline** principle skill. |
+| No `as` casts | An `as` is a claim the compiler can't check. Use one only right after validation. Never `as any`, and no `!` to dodge a possibly-undefined value. Handle the `undefined`. |
+| Plain discriminated unions | Model "one of these states" as a union of object types with a `kind` string field, then `switch` on `kind`. No bags of optional fields where only some combinations are valid. |
+| Exhaustive `switch` | End a `switch` over a union with a `default` that throws, so a new variant can't slip through silently. |
+| Spell types out | Write the object type you mean. Avoid conditional types, mapped types with key remapping, template literal types, and deep generics in application code. A plain type that repeats a few fields beats one a reader has to evaluate. |
+| Types over interfaces only when the repo does | Match the repo's choice between `type` and `interface`. Default to `type`. |
+| Object parameters past three | Past three parameters, pass one object so call sites read clearly. |
+| `null` and `undefined` | Pick the one the repo uses for "no value" and use it consistently. Check it with `=== null` or `=== undefined`, not truthiness, when `0` or `""` are valid. |
+| `async` and `await` | Use `async`/`await`, not `.then()` chains. Always `await` or return a promise. Never leave one floating. |
+| Real tests | Don't mock what you can run. Use the repo's test runner and real modules. Mock only what you can't run locally. |
+| Structured logging | Use the repo's logger with enough context to debug from an id. No `console.log` in shipped code. |
 
 Examples: `references/patterns.md`.

@@ -1,122 +1,118 @@
 # Python patterns
 
-Code examples for each rule in `SKILL.md`. Python 3.12 or later. The underlying principles are language-agnostic. See the **type-system-discipline** and **boundary-discipline** principle skills.
+Examples for the rules in `../SKILL.md`. Style examples (inlining, names, layout, comments, plain branching, plain loops) live in the **code-style** skill. Python 3.10 or later.
 
-## Tagged unions and exhaustive `match`
+## Dataclasses for records
 
 ```python
 from dataclasses import dataclass
-from typing import Literal, assert_never
 
-# Don't. A bool plus optionals lets contradictory states exist.
-@dataclass
-class DiffStateLoose:
-    loading: bool
-    diff: str | None = None
-    error: str | None = None
 
-# Do. Only valid states exist.
-@dataclass(frozen=True, slots=True)
-class Loading:
-    kind: Literal["loading"] = "loading"
-
-@dataclass(frozen=True, slots=True)
-class Ready:
-    diff: str
-    kind: Literal["ready"] = "ready"
-
-@dataclass(frozen=True, slots=True)
-class Failed:
-    error: str
-    kind: Literal["failed"] = "failed"
-
-type DiffState = Loading | Ready | Failed
-
-def describe(state: DiffState) -> str:
-    match state:
-        case Loading():
-            return "loading"
-        case Ready(diff=diff):
-            return f"{len(diff)} chars"
-        case Failed(error=error):
-            return f"failed: {error}"
-        case _:
-            assert_never(state)
+@dataclass(frozen=True)
+class Invoice:
+    invoice_id: str
+    customer_id: str
+    total_in_cents: int
+    paid: bool
 ```
 
-## Branded primitives
-
-```python
-from typing import NewType
-from uuid import UUID
-
-AgentId = NewType("AgentId", str)
-
-def parse_agent_id(raw: str) -> AgentId:
-    UUID(raw)
-    return AgentId(raw)
-
-def focus_agent(agent_id: AgentId) -> None: ...
-```
-
-`focus_agent("abc")` fails the type check. Only `parse_agent_id` creates an `AgentId`.
-
-## Schemas before guards
+## Parse at the boundary
 
 ```python
 from pydantic import BaseModel, ValidationError
 
-class CreateUser(BaseModel):
+
+class CreateUserRequest(BaseModel):
     email: str
-    name: str
+    display_name: str
 
-def handle(body: bytes) -> CreateUser:
+
+def parse_create_user_request(body: bytes) -> CreateUserRequest:
     try:
-        return CreateUser.model_validate_json(body)
-    except ValidationError as err:
-        raise BadRequest(str(err)) from err
+        return CreateUserRequest.model_validate_json(body)
+    except ValidationError as error:
+        raise BadRequestError(str(error)) from error
 ```
 
-Use whichever schema library the repo already has. Add one only when it has none.
+Use the schema library the repo already has. Without one, parse into a dataclass by hand at the boundary and raise on anything missing.
 
-## `Protocol` for seams
+## One state at a time
 
 ```python
-from typing import Protocol
-
-class Clock(Protocol):
-    def now(self) -> float: ...
-
-def is_expired(deadline: float, clock: Clock) -> bool:
-    return clock.now() > deadline
+# Avoid. Optional fields allow states that can't happen, such as uploading with an error.
+@dataclass
+class UploadStatus:
+    uploading: bool
+    file_url: str | None = None
+    error_message: str | None = None
 ```
 
-A test passes any object with a `now()` method. No inheritance, no mock library.
+```python
+# Write. One small dataclass per state, and plain `isinstance` checks.
+@dataclass(frozen=True)
+class Uploading:
+    pass
 
-## Mutable defaults
+
+@dataclass(frozen=True)
+class Uploaded:
+    file_url: str
+
+
+@dataclass(frozen=True)
+class UploadFailed:
+    error_message: str
+
+
+def describe_upload(upload_status: Uploading | Uploaded | UploadFailed) -> str:
+    if isinstance(upload_status, Uploading):
+        return "Uploading"
+
+    if isinstance(upload_status, Uploaded):
+        return f"Uploaded to {upload_status.file_url}"
+
+    if isinstance(upload_status, UploadFailed):
+        return f"Upload failed: {upload_status.error_message}"
+
+    raise ValueError(f"Unknown upload status: {upload_status!r}")
+```
+
+## No mutable defaults
 
 ```python
-# Don't. The same list is shared by every call.
+# Avoid. Every call shares the same list.
 def add_tag(tag: str, tags: list[str] = []) -> list[str]:
     tags.append(tag)
     return tags
+```
 
-# Do.
-def add_tag(tag: str, tags: tuple[str, ...] = ()) -> tuple[str, ...]:
-    return (*tags, tag)
+```python
+# Write.
+def add_tag(tag: str, tags: list[str] | None = None) -> list[str]:
+    if tags is None:
+        tags = []
+
+    return [*tags, tag]
 ```
 
 ## Real tests
 
 ```python
+import json
+from pathlib import Path
+
 import pytest
 
-@pytest.mark.parametrize(("raw", "expected"), [("a,b", ["a", "b"]), ("", [])])
-def test_split_tags(raw: str, expected: list[str]) -> None:
-    assert split_tags(raw) == expected
 
-def test_writes_report(tmp_path: Path) -> None:
-    out = tmp_path / "report.json"
-    write_report(out, rows=[{"id": 1}])
-    assert json.loads(out.read_text()) == [{"id": 1}]
+@pytest.mark.parametrize(("raw_tags", "expected_tags"), [("a,b", ["a", "b"]), ("", [])])
+def test_split_tags(raw_tags: str, expected_tags: list[str]) -> None:
+    assert split_tags(raw_tags) == expected_tags
+
+
+def test_write_report_saves_rows_as_json(tmp_path: Path) -> None:
+    report_path = tmp_path / "report.json"
+
+    write_report(report_path, rows=[{"invoice_id": "inv_1"}])
+
+    assert json.loads(report_path.read_text()) == [{"invoice_id": "inv_1"}]
 ```

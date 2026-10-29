@@ -26,7 +26,7 @@ All skills install side by side, so every skill sits at `../<name>/SKILL.md` fro
 | Cursor field | Claude Code | Codex |
 | --- | --- | --- |
 | `subagent_type: "poteto-agent"` or `"jack-agent"` | `subagent_type: "jack-agent"` | A subagent briefed to read `../jack-mode/SKILL.md` first |
-| `subagent_type: "comment-sicko"` or a `thermo-nuclear-*-subagent` | The same `subagent_type` | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
+| `subagent_type: "comment-sicko"`, `"style-reviewer"`, or a `thermo-nuclear-*-subagent` | The same `subagent_type` | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
 | `subagent_type: generalPurpose` | `"general-purpose"` | Any subagent |
 | `readonly: true` | `subagent_type: "Explore"`, and say "do not edit files" in the brief | Say "do not edit files" in the brief |
 | `run_in_background: true` | Omit. Subagents already run in the background. | Omit |
