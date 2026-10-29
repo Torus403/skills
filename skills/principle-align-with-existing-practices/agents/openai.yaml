@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Align With Existing Practices"
+  short_description: "Apply before designing or writing anything in an existing codebase"
+policy:
+  allow_implicit_invocation: false

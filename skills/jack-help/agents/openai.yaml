@@ -1,0 +1,5 @@
+interface:
+  display_name: "Jack Help"
+  short_description: "Which skill or playbook fits this?"
+policy:
+  allow_implicit_invocation: false
