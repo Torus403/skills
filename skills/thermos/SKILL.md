@@ -4,6 +4,8 @@ description: "Launch both thermo-nuclear review subagents in parallel, then synt
 disable-model-invocation: true
 ---
 
+Field names below are Cursor's. Map them with `../jack-mode/references/harness.md`. In Codex, brief each subagent with the body of `~/.claude/agents/<name>.md`, which `install.sh` puts there for both tools.
+
 # Thermos
 
 Run the two thermo review passes as async background subagents in parallel, then synthesize their results.
