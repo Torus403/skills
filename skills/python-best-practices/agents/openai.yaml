@@ -1,0 +1,5 @@
+interface:
+  display_name: "Python Best Practices"
+  short_description: "Python best practices"
+policy:
+  allow_implicit_invocation: false
