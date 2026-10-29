@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Ask Up Front Then Run"
+  short_description: "Apply when tempted to start building before the plan is clear, or tempted to..."
+policy:
+  allow_implicit_invocation: false

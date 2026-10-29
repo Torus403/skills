@@ -1,0 +1,5 @@
+interface:
+  display_name: "Reflect"
+  short_description: "Review a finished session with four parallel reviewers, then route each..."
+policy:
+  allow_implicit_invocation: false

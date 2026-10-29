@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Fewest Moving Parts"
+  short_description: "Apply when choosing a design or an implementation"
+policy:
+  allow_implicit_invocation: false
