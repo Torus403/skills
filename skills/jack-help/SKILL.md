@@ -42,6 +42,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 
 | Want to | Type |
 | --- | --- |
+| Read Jack's coding style and examples | `code-style` |
 | Build test-first | `tdd` |
 | Diagnose a hard bug or a perf regression | `diagnosing-bugs` |
 | Run N attempts at one task and keep the best parts | `/arena` |
@@ -62,6 +63,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Strip AI slop from the diff | `/deslop` |
 | Strip comments before review | `/no-comments` |
 | Deep bug, security, and maintainability review | `/thermos` |
+| Check a diff against Jack's coding style | the `style-reviewer` subagent, or `/jack-mode review the style of this branch` |
 | Check the diff matches the spec | `spec-review` |
 | Fix failing CI | `/fix-ci` |
 | Resolve merge conflicts | `/fix-merge-conflicts` |

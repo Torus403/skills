@@ -9,7 +9,7 @@ Jack's agent skills for Claude Code and Codex. They are built from [pstack](http
 - **Simple wins.** The least fancy design with the fewest moving parts and the least logic, with no bugs, crashes, or surprises.
 - **Docs only for big things.** Specs for new features, core logic, and architecture go in `docs/specs/`. Architecture decisions go in `docs/adr/`. Small work gets none.
 - **Everything is a PR.** Branch `type/short-desc`, Conventional Commits, a conventional PR title. A feature is one big PR. Squash-merged, and only when Jack says so.
-- **Code has no comments**, as a practical rule, not an absolute one.
+- **Plain, readable code.** Deep modules, inlined single-use helpers, long descriptive names, blank lines between steps, and almost no comments. The **code-style** skill holds the rules and examples.
 - **Verified for real.** The change runs the way a user would run it before anyone calls it done.
 
 ## Install
@@ -41,7 +41,7 @@ Not sure which skill fits? Type `/jack-help` (or `$jack-help`) with a question.
 | `skills/<name>/` | One skill per folder: `SKILL.md`, any references, and `agents/openai.yaml` for Codex. |
 | `skills/jack-mode/` | The router, its playbooks, and `references/harness.md`, which maps tool names to Claude Code and Codex. |
 | `skills/principle-*/` | Short rules that `jack-mode` reads at task start. |
-| `agents/` | Subagents for Claude Code: `jack-agent`, `comment-sicko`, and the two thermos reviewers. |
+| `agents/` | Subagents for Claude Code: `jack-agent`, `comment-sicko`, `style-reviewer`, and the two thermos reviewers. |
 | `upstream/` | Untouched copies of every source, with their licences. Never installed. |
 | `scripts/check.py` | Checks every skill's frontmatter, Codex file, and cross-references. |
 
