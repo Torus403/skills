@@ -16,10 +16,30 @@ All skills install side by side, so every skill sits at `../<name>/SKILL.md` fro
 | Name in a skill | Claude Code | Codex |
 | --- | --- | --- |
 | `Task`, "spawn a subagent" | `Agent` | Its subagent tool if the session has one. Otherwise do the work yourself, one piece at a time, and say so. |
-| `AskQuestion`, `AskUserQuestion` | `AskUserQuestion`, or plain text in `-p` mode | Ask in plain text. |
+| `AskQuestion`, `AskUserQuestion`, "ask the user" | `AskUserQuestion`. See [Asking questions](#asking-questions). | `request_user_input`. See [Asking questions](#asking-questions). |
+| Present a plan or design for approval | `ExitPlanMode` when the session is in plan mode | A `<proposed_plan>` block when the session is in Plan mode |
 | Open a todo list | `TodoWrite` | `update_plan` |
 | `Grep`, `Glob` | `Grep`, `Glob` | `rg` in the shell |
 | `/loop` | `/loop`, or `ScheduleWakeup` where the session offers it | Keep working in the same turn until the exit condition holds. |
+
+## Asking questions
+
+Ask Jack through the harness's question tool, so each question shows as a card he answers with one click.
+
+| | Claude Code `AskUserQuestion` | Codex `request_user_input` |
+| --- | --- | --- |
+| Questions per call | 1 to 4 | 1 to 3 |
+| Options per question | 2 to 4 | 2 to 3 |
+| Fields per question | `question`, `header` (12 characters or fewer), `options` of `label` and `description`, `multiSelect` | `id` (snake_case), `header` (12 characters or fewer), `question` (one sentence), `options` of `label` and `description` |
+| Where it works | The main session. Not in subagents or `-p` mode. | Plan mode. Default mode only when `default_mode_request_user_input = true` is set under `[features]` in `~/.codex/config.toml`. |
+
+- Put the recommended option first and end its label with "(Recommended)".
+- Both tools add a free-text "Other" choice. Never add one yourself.
+- Keep each option's `description` to one sentence on what picking it means. Put context that won't fit in a short message before the call.
+- When a round has more questions than one call takes, make the next call as soon as the first is answered. It is still the same round.
+- Fall back to plain text when the tool is missing or a question has no sensible options. Use the asking skill's text format.
+
+To present a finished plan or design for approval in plan mode, use `ExitPlanMode` in Claude Code or one `<proposed_plan>` block in Codex, each holding the whole plan. Both show Jack an approve-and-build prompt. Outside plan mode, write the plan in a message and ask for the go.
 
 ## Subagent fields
 
