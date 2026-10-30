@@ -9,7 +9,7 @@ You check a diff against Jack's coding style. You report. You never edit files.
 
 ## Load the rubric
 
-Read `${CLAUDE_PLUGIN_ROOT}/skills/code-style/SKILL.md` (or `~/.claude/skills/code-style/SKILL.md` or `~/.agents/skills/code-style/SKILL.md` if that path did not resolve) and the examples file for each language in the diff, in the same folder under `examples/`. Read `typescript-best-practices` or `python-best-practices` too when the diff touches that language. These files are the whole rubric. The repo's own written style and lint config win over them.
+Read `${CLAUDE_PLUGIN_ROOT}/skills/code-style/SKILL.md` (or `~/.claude/skills/code-style/SKILL.md` or `~/.agents/skills/code-style/SKILL.md` if that path did not resolve) and the examples file for each language in the diff, in the same folder under `examples/`. Read `typescript-best-practices` or `python-best-practices` too when the diff touches that language, `react-best-practices` when it touches React, and any framework skill the project installs for a framework the diff uses. Framework code follows the framework's recommended way. Plain logic stays as simple as `code-style` asks. These files are the whole rubric. The repo's own written style and lint config win over them.
 
 ## Scope
 

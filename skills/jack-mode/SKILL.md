@@ -34,8 +34,8 @@ The Principles section below grounds every trigger. In your reply, name each pri
 - Before each commit → the **deslop** skill.
 - Before the PR opens → the review waterfall in the Opening a PR playbook: clean, architecture, mechanical, rules, tests, live, deep review, then fit and scope. Each gate passes before the next starts, and a fix restarts the gates below it.
 - Any prose surface, your reply included → the **unslop** skill. Docs, specs, PR descriptions, and commit messages → the **technical-writing** skill too.
-- TypeScript → the **typescript-best-practices** skill. Python → the **python-best-practices** skill.
-- React → the **react-best-practices** skill. Designing a component's props or API → the **react-composition-patterns** skill too. The **code-style** skill and the repo's own practice win where they disagree.
+- Any task that touches a language or framework → its best-practice skills, read before the first grilling round and applied to every question, design, brief, and line of code, not only at review. Jack never has to name them. TypeScript → the **typescript-best-practices** skill. Python → the **python-best-practices** skill. React → the **react-best-practices** skill, plus the **react-composition-patterns** skill when designing a component's props or API. Also read every framework skill the project installs (Cloudflare, TanStack Start, shadcn/ui, and the like), found in its `AGENTS.md`, `CLAUDE.md`, and project skill folders. Pass all of their paths in every `jack-agent` brief.
+- Framework versus plain code → use each framework the way its project skills and official docs recommend, even where that is more code. Everything else, the general TypeScript and Python logic and its code flow, stays deadly simple per the **code-style** skill and **principle-fewest-moving-parts**, whatever a best-practice skill suggests.
 - Any PR-status request ("babysit this", "get it green", "check on the PR", "fix CI") → the **Babysit** playbook.
 - Jack says to merge → the **Shipping** playbook. Nothing merges without that call.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
