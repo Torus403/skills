@@ -21,7 +21,7 @@ The Principles section below grounds every trigger. In your reply, name each pri
 
 - Your first message on a task → tell Jack, in your own words, the goal, the problem it solves, and, if the task ships a change, the smallest change you expect to meet it. If the evidence rules out the change Jack asked for, show it and stop. Restate the goal in each subagent brief, and open each PR's `## Why` with it.
 - Before any design or code → the **principle-align-with-existing-practices** skill. Find the closest existing example in the codebase and match its patterns, naming, libraries, and file layout. Invent only what the codebase has no answer for.
-- Anything beyond a fully specified small edit → the **grilling** skill before you build. Ask in rounds, one recommendation per question, until the design tree is empty. Facts you can look up or settle by running something are yours to find, never Jack's to answer (sketch them with the Prototype playbook). Do not start building until Jack confirms you share the understanding.
+- Anything beyond a fully specified small edit → the **grilling** skill before you build. Ask in rounds, one recommendation per question, until the design tree is empty. Facts you can look up or settle by running something are yours to find, never Jack's to answer (sketch them with the Prototype playbook). Before you state how the code works, in a question or anywhere else, read and trace the code that does it. Do not start building until Jack confirms you share the understanding.
 - A new feature, core logic, or an architecture change → write it down. A product decision or a spec goes to `.jack/specs/<feature>.md` via the **to-spec** skill. An architecture decision goes to `.jack/adr/` and new terms to `.jack/GLOSSARY.md` via the **domain-modeling** skill (or run the **grill-with-docs** skill to do both while grilling). Small work, bug fixes, and refactors get no doc.
 - Any file you write in a repo that isn't the task's code → the Jack folder, kept out of git, per the Files you write in a repo section of [`references/harness.md`](references/harness.md). Never commit it.
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
@@ -56,7 +56,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 **Jack's core**
 
 - **Align with Existing Practices.** Before designing or writing anything. Match how the codebase already solves this kind of problem before you invent.
-- **Fewest Moving Parts.** Choosing a design. The least fancy, most robust, simplest design with the least logic that still scales, and no bugs, crashes, or surprises.
+- **Fewest Moving Parts.** Choosing a design. The least fancy, most robust, simplest design with the least logic that still scales, and no bugs, crashes, or surprises. One way for every case, unless the code shows it can't work.
 - **Ask Up Front, Then Run.** Tempted to ask mid-build, or tempted to start before the plan is clear. Ask everything before building, then don't block.
 
 **Core**
