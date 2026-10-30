@@ -89,4 +89,4 @@ Not sure which skill fits? Type `/jack-help` (or `$jack-help`) with a question.
 
 ## Credits
 
-The skills in `skills/` are adapted from MIT-licensed work by Lauren Tan (poteto), Matt Pocock, and Cursor. The original licences and an unedited copy of each source live in [`upstream/`](./upstream/README.md).
+The skills in `skills/` are adapted from MIT-licensed work by Lauren Tan (poteto), Matt Pocock, and Cursor. The original licences and an unedited copy of each source live in [`upstream/`](./upstream/README.md). The four `ui-*` skills are adapted from unslop by Damir Sokolovsky (CC BY 4.0), Anthropic's frontend-design and Paul Bakaus's Impeccable (Apache 2.0), and MIT-licensed work by Vercel, Emil Kowalski, Jakub Krehel and Leonxlnx. They are not tracked in `upstream/`, and each skill's `NOTICE.md` lists its sources, changes and licences.

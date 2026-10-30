@@ -29,6 +29,7 @@ The Principles section below grounds every trigger. In your reply, name each pri
 - Code crossing a function boundary → the **architect** skill.
 - Parallel fan-out → the **swarm** skill for coverage, races, and exploration partitions. Use **arena** for design or code bakeoffs.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 4).
+- Anything a user sees (a website, landing page, dashboard, app screen or component) → the **ui-design** skill, before any design question or code. It researches on Mobbin with the **ui-research** skill, puts the direction and layout to Jack for approval, then builds with the **ui-build** skill and checks with the **ui-verify** skill.
 - Shipping UI or a CLI → the **control-ui** skill (browser, Electron, web) or the **control-cli** skill (CLIs and TUIs). For bug fixes, reproduce first on the same surface yourself.
 - Claiming something works → the **verify-this** skill when the claim is load-bearing. Running a benchmark or reporting a speedup → the **benchmark-checklist** skill first.
 - Before each commit → the **deslop** skill.
