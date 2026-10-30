@@ -65,6 +65,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Deep bug, security, and maintainability review | `/thermos` |
 | Check a diff against Jack's coding style | the `style-reviewer` subagent, or `/jack-mode review the style of this branch` |
 | Check the diff matches the spec | `spec-review` |
+| Check the diff follows the repo's conventions and code paths and stays in scope | the `consistency-reviewer` subagent, or `/jack-mode check this branch fits the codebase` |
 | Fix failing CI | `/fix-ci` |
 | Resolve merge conflicts | `/fix-merge-conflicts` |
 | Get a PR to green | `/jack-mode babysit this PR` |

@@ -6,7 +6,7 @@ Invoked at the end of every other playbook that changes code.
 
 **Commits.** Conventional Commits `type(scope): subject`, no trailing period. Type such as `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `build`, or `ci`. Commit as often as is useful. Size does not matter, because the PR squash-merges. Commit bodies don't restate the subject.
 
-**Before review.** Run the **deslop** skill over the diff, then the **no-comments** skill. Then run the **thermos** skill, the **spec-review** skill, and the `style-reviewer` subagent side by side, and fix every finding that holds up. Run the repo's lint, typecheck, and tests. Write the title, the description, and commit bodies with the **technical-writing** skill, then the **unslop** skill.
+**Before review.** Run the **deslop** skill over the diff, then the **no-comments** skill. Then run the **thermos** skill, the **spec-review** skill, and the `style-reviewer` subagent side by side, and fix every finding that holds up. Then run the `consistency-reviewer` subagent last, on the final diff, with the goal in one sentence. It checks the repo's conventions, reuse of the existing code paths, and that every hunk serves the goal. Drop or split out each hunk it flags as out of scope, and fix the rest that holds up. Run the repo's lint, typecheck, and tests. Write the title, the description, and commit bodies with the **technical-writing** skill, then the **unslop** skill.
 
 **Title.** Conventional Commits `type(scope): subject`. Scope is the area. Subject is short, imperative, and names a real symbol when one carries the change, for example `feat(search): add saved searches`. The title becomes the squash commit subject.
 
