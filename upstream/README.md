@@ -10,4 +10,6 @@ Verbatim copies of the skill repos this one builds on. Nothing in this folder is
 | `cursor-team-kit/` | [cursor/plugins `cursor-team-kit/`](https://github.com/cursor/plugins/tree/main/cursor-team-kit) by Cursor. Holds `deslop`, which pstack calls but does not ship. | `1ba91fc25c0977741dd0e267849e6234b037ed0a` | MIT, Copyright (c) 2026 Cursor |
 | `mattpocock-skills/` | [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock, v1.3.2 | `a496f5513d4a4cf889bc48e189e579f4b0bdf6aa` | MIT, Copyright (c) 2026 Matt Pocock |
 
-To refresh a folder, replace it wholesale with a fresh copy of the upstream tree at a newer commit and update this table.
+`sources.json` names the repo, branch, and path behind each folder, and the commit it was copied at. Its `feeds` map says which of Jack's skills grew from an upstream skill with a different name.
+
+To refresh, run `python3 scripts/sync_upstream.py`. It replaces each folder whose upstream tree changed and updates the commits here. `.github/workflows/sync-upstream.yml` runs it every Monday and opens a `chore/sync-upstream` PR that lists the changed upstream skills next to Jack's versions to check. It never touches `skills/` or `agents/`.
