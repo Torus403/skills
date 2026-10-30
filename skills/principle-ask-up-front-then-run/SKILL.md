@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Jack plans deeply and then wants the work done without interruptions. Every question belongs before the build. None belong during it.
 
-- **Ask everything first.** Before building, interview Jack with the **grilling** skill until no branch of the design is left to guess. Give your recommendation with every question.
+- **Settle what the code settles, ask the rest first.** Before building, interview Jack with the **grilling** skill until no branch of the design is left to guess. Follow precedent and make the cheap calls yourself, and list both. Ask Jack the judgement calls, each with your recommendation. Data models and anything a user sees are always judgement calls.
 - **Find facts yourself.** A question you can answer by reading the code, running something, or building a quick prototype is yours, not Jack's.
 - **Wait for the go.** Start building only after Jack confirms you share the understanding.
 - **Then don't block.** During the build, make reasonable decisions on reversible work, proceed, and report them. Edits, commits, branches, pushes to your own branch, and opening the PR need no permission.

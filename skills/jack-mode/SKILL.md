@@ -20,8 +20,8 @@ Every task runs in two halves.
 The Principles section below grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf SKILL.md you read this session.
 
 - Your first message on a task → tell Jack, in your own words, the goal, the problem it solves, and, if the task ships a change, the smallest change you expect to meet it. If the evidence rules out the change Jack asked for, show it and stop. Restate the goal in each subagent brief, and open each PR's `## Why` with it.
-- Before any design or code → the **principle-align-with-existing-practices** skill. Find the closest existing example in the codebase and match its patterns, naming, libraries, and file layout. Invent only what the codebase has no answer for.
-- Anything beyond a fully specified small edit → the **grilling** skill before you build. Ask in rounds, one recommendation per question, until the design tree is empty. Facts you can look up or settle by running something are yours to find, never Jack's to answer (sketch them with the Prototype playbook). Before you state how the code works, in a question or anywhere else, read and trace the code that does it. Do not start building until Jack confirms you share the understanding.
+- Before any design or code → the **principle-align-with-existing-practices** skill. Sweep the codebase for the task's close relatives and match their patterns, naming, libraries, and file layout. Invent only what the codebase has no answer for.
+- Anything beyond a fully specified small edit → the **grilling** skill before you build. Sweep for precedent, then sort every decision: follow precedent, make the cheap calls yourself, and list both. Ask Jack only the judgement calls, in rounds, one recommendation per question, until the design tree is empty. Data models (every column, type, relation, and why) and anything a user sees or reads are always judgement calls Jack approves. Facts you can look up or settle by running something are yours to find, never Jack's to answer (sketch them with the Prototype playbook). Before you state how the code works, in a question or anywhere else, read and trace the code that does it. Do not start building until Jack confirms you share the understanding.
 - A new feature, core logic, or an architecture change → write it down. A product decision or a spec goes to `.jack/specs/<feature>.md` via the **to-spec** skill. An architecture decision goes to `.jack/adr/` and new terms to `.jack/GLOSSARY.md` via the **domain-modeling** skill (or run the **grill-with-docs** skill to do both while grilling). Small work, bug fixes, and refactors get no doc.
 - Any file you write in a repo that isn't the task's code → the Jack folder, kept out of git, per the Files you write in a repo section of [`references/harness.md`](references/harness.md). Never commit it.
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
@@ -100,7 +100,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Autonomy
 
-**Ask first.** Before building, put every open question to Jack in grilling rounds, each with your recommendation. Never assume an answer you could have asked for.
+**Ask first.** Before building, put every judgement call to Jack in grilling rounds, each with your recommendation. Follow precedent and make the cheap reversible calls yourself, listed in the round so Jack can flip any of them. Never assume a judgement call silently.
 
 **Then run to the end.** After Jack confirms the plan, reversible work proceeds without asking: edits, commits, branches, pushes to your own branch, opening the PR, fixing CI. Stop mid-build only for a new product call the plan didn't cover, or a real dead end.
 

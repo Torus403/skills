@@ -91,7 +91,7 @@ grep -qxF '/.jack/' "$common/info/exclude" 2>/dev/null || echo '/.jack/' >> "$co
 
 A generated project skill has to sit where the harness loads it: `.claude/skills/<name>/` and its `.agents/skills/<name>` symlink. Add both to the same exclude file with the same `grep -qxF ... || echo ...` line, as `/.claude/skills/<name>/` and `/.agents/skills/<name>`.
 
-The repo's tracked docs (`GLOSSARY.md`, `docs/adr/`, `docs/specs/`, `CLAUDE.md`, `AGENTS.md`) belong to the repo's team. Read them alongside the Jack folder, and where the two disagree, say so. Never edit or add to them unless Jack asks.
+The repo's tracked docs (`GLOSSARY.md`, `docs/adr/`, `docs/specs/`, `CLAUDE.md`, `AGENTS.md`) belong to the repo's team. Read them alongside the Jack folder, and where the two disagree, say so. Never edit or add to them unless Jack asks. A convention line Jack approves in a grilling plan counts as asking.
 
 Before every commit, run `git status --porcelain` and confirm that only the task's code is staged.
 
