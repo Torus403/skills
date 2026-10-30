@@ -57,6 +57,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Study how the best products solve a screen, on Mobbin | `ui-research` |
 | Build UI with the project's tokens, sizing standards and consistency | `ui-build` |
 | Check UI rendered, with worst-case data, accessibility and the guidelines | `ui-verify` |
+| Get a website crawled, indexed and ranked, or find why it is not on Google | `seo` |
 | Build or review an animation | `animate`, `/review-animations` |
 | Fix animations that drop frames | `animation-performance` |
 | Make a web app feel native on a phone | `mobile-native` |

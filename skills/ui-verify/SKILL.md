@@ -43,6 +43,7 @@ Walk the code and the renders against each source, and cite `path/to/file:line` 
 - The signs and the Defaults in [`../ui-design/references/signs.md`](../ui-design/references/signs.md).
 - The **review-animations** skill for every animation, and the **animation-performance** skill when one drops frames.
 - The **mobile-native** skill for anything used on a phone.
+- The **seo** skill's audit script and new page checklist for any public page.
 - The tells in [`../ui-build/references/dashboards.md`](../ui-build/references/dashboards.md) for an Operate screen.
 
 ## 5. Check consistency

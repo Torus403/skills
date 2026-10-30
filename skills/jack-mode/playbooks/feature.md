@@ -12,7 +12,7 @@
    - **Smallest safe decomposition.** If one worker is best, name why.
 5. Create the branch `feat/<short-desc>` and build. Delegate code-writing to a `jack-agent` with a specific scope (file paths, the named data shape, the existing example to match, the paths of the best-practice and framework skills from step 1, the **ui-build** skill's path and the approved UI plan for anything a user sees, and success criteria). When the implementation admits several valid shapes, delegate through the **arena** skill instead. Comments per **Comments**. Run `deslop` before each commit. Commit as you go with Conventional Commits.
 6. For an epic, build it in phases on the same branch. Each phase ends in a verifiable state with its own commits (the **sequence-verifiable-units** principle skill). Do not split it into stacked PRs.
-7. Verify on the matching surface with `control-ui` or `control-cli`, against the spec when one exists. Anything a user sees also passes the **ui-verify** skill with an Approve verdict. "Inconclusive" or wrong-surface is not a pass. Flag it.
+7. Verify on the matching surface with `control-ui` or `control-cli`, against the spec when one exists. Anything a user sees also passes the **ui-verify** skill with an Approve verdict. Anything public on the web also passes the **seo** skill's audit with no `HIGH`. "Inconclusive" or wrong-surface is not a pass. Flag it.
 8. Run **Opening a PR**.
 
 **Reply:** what you built, what you chose and why, the throughput checkpoint, how you verified it, and anything left open. Tables for design alternatives.
