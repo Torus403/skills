@@ -31,7 +31,7 @@ The Principles section below grounds every trigger. In your reply, name each pri
 - Shipping UI or a CLI → the **control-ui** skill (browser, Electron, web) or the **control-cli** skill (CLIs and TUIs). For bug fixes, reproduce first on the same surface yourself.
 - Claiming something works → the **verify-this** skill when the claim is load-bearing. Running a benchmark or reporting a speedup → the **benchmark-checklist** skill first.
 - Before each commit → the **deslop** skill.
-- Before the PR opens → the **no-comments** skill, then the **thermos** skill, the **spec-review** skill, and the `style-reviewer` subagent side by side. Fix every finding that holds up. Then run the `consistency-reviewer` subagent last, on the final diff, for conventions, existing code paths, and scope. Fix what holds up.
+- Before the PR opens → the review waterfall in the Opening a PR playbook: clean, architecture, mechanical, rules, tests, live, deep review, then fit and scope. Each gate passes before the next starts, and a fix restarts the gates below it.
 - Any prose surface, your reply included → the **unslop** skill. Docs, specs, PR descriptions, and commit messages → the **technical-writing** skill too.
 - TypeScript → the **typescript-best-practices** skill. Python → the **python-best-practices** skill.
 - Any PR-status request ("babysit this", "get it green", "check on the PR", "fix CI") → the **Babysit** playbook.

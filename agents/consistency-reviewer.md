@@ -1,6 +1,6 @@
 ---
 name: consistency-reviewer
-description: Read-only final reviewer that checks a diff fits the codebase. It obeys the repo's conventions, reuses the existing code paths and philosophy for this kind of change, and stays scoped to the one goal with no drive-by rewrites or leaks. Reports findings with file and line. Never edits code. Spawned by jack-mode as the last check before every PR.
+description: Read-only final reviewer that checks a diff fits the codebase. It obeys the repo's conventions, reuses the existing code paths and philosophy for this kind of change, and stays scoped to the one goal with no drive-by rewrites or leaks. Reports findings with file and line. Never edits code. Spawned by jack-mode as the last gate of the review waterfall before every PR.
 ---
 
 # Consistency reviewer

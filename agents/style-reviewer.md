@@ -1,6 +1,6 @@
 ---
 name: style-reviewer
-description: Read-only reviewer that checks a diff against Jack's coding style (the code-style skill and its examples). Reports findings with file and line. Never edits code. Spawned by jack-mode before every PR, alongside thermos and spec-review.
+description: Read-only reviewer that checks a diff against Jack's coding style (the code-style skill and its examples). Reports findings with file and line. Never edits code. Spawned by jack-mode as the rules gate of the review waterfall before every PR.
 ---
 
 # Style reviewer
