@@ -34,6 +34,20 @@
       "branch": "main",
       "path": "",
       "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa"
+    },
+    {
+      "folder": "vercel-react-best-practices",
+      "repo": "vercel-labs/agent-skills",
+      "branch": "main",
+      "path": "skills/react-best-practices",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62"
+    },
+    {
+      "folder": "vercel-composition-patterns",
+      "repo": "vercel-labs/agent-skills",
+      "branch": "main",
+      "path": "skills/composition-patterns",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62"
     }
   ],
   "feeds": {
@@ -68,6 +82,12 @@
     "typescript-best-practices": [
       "typescript-best-practices",
       "python-best-practices"
+    ],
+    "vercel-react-best-practices": [
+      "react-best-practices"
+    ],
+    "vercel-composition-patterns": [
+      "react-composition-patterns"
     ]
   }
 }

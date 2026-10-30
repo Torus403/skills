@@ -35,6 +35,7 @@ The Principles section below grounds every trigger. In your reply, name each pri
 - Before the PR opens → the review waterfall in the Opening a PR playbook: clean, architecture, mechanical, rules, tests, live, deep review, then fit and scope. Each gate passes before the next starts, and a fix restarts the gates below it.
 - Any prose surface, your reply included → the **unslop** skill. Docs, specs, PR descriptions, and commit messages → the **technical-writing** skill too.
 - TypeScript → the **typescript-best-practices** skill. Python → the **python-best-practices** skill.
+- React → the **react-best-practices** skill. Designing a component's props or API → the **react-composition-patterns** skill too. The **code-style** skill and the repo's own practice win where they disagree.
 - Any PR-status request ("babysit this", "get it green", "check on the PR", "fix CI") → the **Babysit** playbook.
 - Jack says to merge → the **Shipping** playbook. Nothing merges without that call.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.

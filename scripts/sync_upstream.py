@@ -135,7 +135,8 @@ def main() -> int:
             print(f"{source['folder']}: changed, {len(changes)} files")
             sections.append(report_section(source, new_commit, changes, vendored, fresh, config["feeds"]))
             old_version = manifest_version(vendored)
-            shutil.rmtree(vendored)
+            if vendored.exists():
+                shutil.rmtree(vendored)
             shutil.copytree(fresh, vendored, symlinks=True, ignore=shutil.ignore_patterns(".git"))
             update_table_row(source["folder"], source["commit"], new_commit, old_version, manifest_version(vendored))
             source["commit"] = new_commit
