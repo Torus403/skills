@@ -9,7 +9,7 @@ You are a **Task subagent**. The parent agent already collected git output and c
 
 ## Rubric
 
-1. Read `~/.claude/skills/thermo-nuclear-code-quality-review/SKILL.md` (or `~/.agents/skills/thermo-nuclear-code-quality-review/SKILL.md`) and treat its `SKILL.md` as the **complete** rubric — tone, approval bar, output ordering, code-judo / 1k-line / spaghetti rules.
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/thermo-nuclear-code-quality-review/SKILL.md` (or `~/.claude/skills/thermo-nuclear-code-quality-review/SKILL.md` or `~/.agents/skills/thermo-nuclear-code-quality-review/SKILL.md` if that path did not resolve) and treat its `SKILL.md` as the **complete** rubric — tone, approval bar, output ordering, code-judo / 1k-line / spaghetti rules.
 2. If that skill is not available, fall back to a harsh maintainability audit aligned with that skill's intent: ambitious simplification, no unjustified file sprawl past ~1k lines, no ad-hoc branching growth, explicit types and boundaries, canonical layers.
 
 ## Work

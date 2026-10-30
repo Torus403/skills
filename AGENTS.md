@@ -9,5 +9,6 @@ This repo holds Jack's skills. Every skill in `skills/` installs into both Claud
 - **Harness names.** Write tool and path names the way `skills/jack-mode/references/harness.md` maps them. Add a row there instead of special-casing a harness in a skill.
 - **Never edit `upstream/`.** Refresh a source by replacing its folder wholesale and updating `upstream/README.md`.
 - **Writing.** Follow the **writing-for-agents** and **unslop** skills. No long dashes.
-- **Check before every PR.** Run `python3 scripts/check.py` and `./install.sh` into a scratch `HOME`.
+- **Plugin.** The repo root is both the `jack-skills` marketplace and the `jack` plugin (`.claude-plugin/`). Leave `version` out of both manifests so installs track commits.
+- **Check before every PR.** Run `python3 scripts/check.py`, `claude plugin validate .`, and `./install.sh` into a scratch `HOME`. The validator's warnings about the missing `version` and the root `CLAUDE.md` are expected.
 - **Ship as a PR.** Branch `type/short-desc`, Conventional Commits, a conventional PR title, squash merge.
