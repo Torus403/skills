@@ -7,7 +7,7 @@ This repo holds Jack's skills. Every skill in `skills/` installs into both Claud
 - **Cross-references.** Name another skill as "the **name** skill" or link `../<name>/SKILL.md`. It must exist.
 - **No model routing.** Subagents run on the session's model. Never name a model.
 - **Harness names.** Write tool and path names the way `skills/jack-mode/references/harness.md` maps them. Add a row there instead of special-casing a harness in a skill.
-- **Never edit `upstream/`.** Refresh a source by replacing its folder wholesale and updating `upstream/README.md`.
+- **Never edit `upstream/`.** Refresh it with `python3 scripts/sync_upstream.py`, which replaces each changed folder wholesale and updates `upstream/sources.json` and `upstream/README.md`. A weekly workflow runs it and opens a `chore/sync-upstream` PR. Port upstream changes into `skills/` in a separate PR. To add a source, add it to `upstream/sources.json` and the table, and map renamed skills under `feeds`.
 - **Writing.** Follow the **writing-for-agents** and **unslop** skills. No long dashes.
 - **Plugin.** The repo root is both the `jack-skills` marketplace and the `jack` plugin (`.claude-plugin/`). Leave `version` out of both manifests so installs track commits.
 - **Check before every PR.** Run `python3 scripts/check.py`, `claude plugin validate .`, and `./install.sh` into a scratch `HOME`. The validator's warnings about the missing `version` and the root `CLAUDE.md` are expected.

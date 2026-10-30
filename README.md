@@ -64,6 +64,7 @@ Not sure which skill fits? Type `/jack-help` (or `$jack-help`) with a question.
 | `agents/` | Subagents for Claude Code: `jack-agent`, `comment-sicko`, `style-reviewer`, `consistency-reviewer`, and the two thermos reviewers. |
 | `upstream/` | Untouched copies of every source, with their licences. Never loaded as skills. |
 | `scripts/check.py` | Checks every skill's frontmatter, Codex file, and cross-references. |
+| `scripts/sync_upstream.py` | Refreshes `upstream/` from the sources in `upstream/sources.json`. `.github/workflows/sync-upstream.yml` runs it weekly and opens a PR. |
 
 ## Credits
 

@@ -1,0 +1,73 @@
+{
+  "sources": [
+    {
+      "folder": "pstack",
+      "repo": "cursor/plugins",
+      "branch": "main",
+      "path": "pstack",
+      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+    },
+    {
+      "folder": "pstack-claude-code-harness",
+      "repo": "cursor/plugins",
+      "branch": "main",
+      "path": "harness/pstack",
+      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+    },
+    {
+      "folder": "thermos",
+      "repo": "cursor/plugins",
+      "branch": "main",
+      "path": "thermos",
+      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+    },
+    {
+      "folder": "cursor-team-kit",
+      "repo": "cursor/plugins",
+      "branch": "main",
+      "path": "cursor-team-kit",
+      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+    },
+    {
+      "folder": "mattpocock-skills",
+      "repo": "mattpocock/skills",
+      "branch": "main",
+      "path": "",
+      "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa"
+    }
+  ],
+  "feeds": {
+    "poteto-mode": [
+      "jack-mode",
+      "handoff"
+    ],
+    "poteto-help": [
+      "jack-help"
+    ],
+    "poteto-agent": [
+      "jack-agent"
+    ],
+    "ask-matt": [
+      "jack-help"
+    ],
+    "bro": [
+      "wait-what"
+    ],
+    "retro": [
+      "reflect"
+    ],
+    "code-review": [
+      "spec-review"
+    ],
+    "setup-matt-pocock-skills": [
+      "setup-repo"
+    ],
+    "principle-never-block-on-the-human": [
+      "principle-ask-up-front-then-run"
+    ],
+    "typescript-best-practices": [
+      "typescript-best-practices",
+      "python-best-practices"
+    ]
+  }
+}

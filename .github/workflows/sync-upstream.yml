@@ -1,0 +1,55 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: sync-upstream
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: chore/sync-upstream
+      BOT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refresh upstream/
+        run: python3 scripts/sync_upstream.py --report "$RUNNER_TEMP/report.md"
+
+      - name: Open or update the sync PR
+        run: |
+          if [ -z "$(git status --porcelain -- upstream)" ]; then
+            echo "Upstream has not changed."
+            exit 0
+          fi
+
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git fetch origin "$BRANCH"
+            if git log "origin/main..origin/$BRANCH" --format=%ae | grep -vqxF "$BOT_EMAIL"; then
+              echo "::warning::$BRANCH has commits from someone else. Merge or close its PR, then rerun."
+              exit 0
+            fi
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "$BOT_EMAIL"
+          git checkout -B "$BRANCH"
+          git add upstream
+          git commit --quiet -m "chore(upstream): sync upstream skills"
+          git push --force origin "$BRANCH"
+
+          if [ -n "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            gh pr edit "$BRANCH" --body-file "$RUNNER_TEMP/report.md"
+          else
+            gh pr create --base main --head "$BRANCH" --title "chore(upstream): sync upstream skills" --body-file "$RUNNER_TEMP/report.md"
+          fi
