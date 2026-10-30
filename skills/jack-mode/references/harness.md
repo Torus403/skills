@@ -28,7 +28,7 @@ Installed as the `jack` Claude Code plugin, every skill and subagent name gets a
 | Cursor field | Claude Code | Codex |
 | --- | --- | --- |
 | `subagent_type: "poteto-agent"` or `"jack-agent"` | `subagent_type: "jack-agent"`, or `"jack:jack-agent"` in the plugin install | A subagent briefed to read `../jack-mode/SKILL.md` first |
-| `subagent_type: "comment-sicko"`, `"style-reviewer"`, or a `thermo-nuclear-*-subagent` | The same `subagent_type`, with a `jack:` prefix in the plugin install | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
+| `subagent_type: "comment-sicko"`, `"style-reviewer"`, `"consistency-reviewer"`, or a `thermo-nuclear-*-subagent` | The same `subagent_type`, with a `jack:` prefix in the plugin install | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
 | `subagent_type: generalPurpose` | `"general-purpose"` | Any subagent |
 | `readonly: true` | `subagent_type: "Explore"`, and say "do not edit files" in the brief | Say "do not edit files" in the brief |
 | `run_in_background: true` | Omit. Subagents already run in the background. | Omit |

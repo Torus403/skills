@@ -61,7 +61,7 @@ Not sure which skill fits? Type `/jack-help` (or `$jack-help`) with a question.
 | `skills/jack-mode/` | The router, its playbooks, and `references/harness.md`, which maps tool names to Claude Code and Codex. |
 | `skills/principle-*/` | Short rules that `jack-mode` reads at task start. |
 | `.claude-plugin/` | The `jack-skills` marketplace and the `jack` plugin manifest. |
-| `agents/` | Subagents for Claude Code: `jack-agent`, `comment-sicko`, `style-reviewer`, and the two thermos reviewers. |
+| `agents/` | Subagents for Claude Code: `jack-agent`, `comment-sicko`, `style-reviewer`, `consistency-reviewer`, and the two thermos reviewers. |
 | `upstream/` | Untouched copies of every source, with their licences. Never loaded as skills. |
 | `scripts/check.py` | Checks every skill's frontmatter, Codex file, and cross-references. |
 
