@@ -1,0 +1,12 @@
+{
+  "name": "jack",
+  "displayName": "Jack's skills",
+  "description": "jack-mode, its playbooks and principles, and every skill and subagent it uses",
+  "author": {
+    "name": "Jack",
+    "url": "https://github.com/Torus403"
+  },
+  "homepage": "https://github.com/Torus403/skills",
+  "repository": "https://github.com/Torus403/skills",
+  "keywords": ["skills", "workflow", "code-review"]
+}

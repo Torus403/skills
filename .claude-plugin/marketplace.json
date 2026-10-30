@@ -1,0 +1,15 @@
+{
+  "name": "jack-skills",
+  "description": "Jack's agent skills and subagents for Claude Code",
+  "owner": {
+    "name": "Jack",
+    "url": "https://github.com/Torus403"
+  },
+  "plugins": [
+    {
+      "name": "jack",
+      "source": "./",
+      "description": "jack-mode, its playbooks and principles, and every skill and subagent it uses"
+    }
+  ]
+}

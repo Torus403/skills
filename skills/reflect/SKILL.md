@@ -41,7 +41,7 @@ Present the synthesizer's full Accepted / Rejected / Backlog output and wait for
 
 List the Backlog items in the summary. There is no tracker. Only the Accepted list waits for approval.
 
-Never edit an installed copy under `~/.claude/skills/` or `~/.agents/skills/`. Skill edits go to Jack's skills repo (`Torus403/skills`, under `skills/<name>/`) on a branch, as a PR that follows the **Opening a PR** playbook. Environment edits (checks, `CLAUDE.md`, `AGENTS.md`, tooling) go to the repo the session worked in, also as a PR. Show each destination before approval.
+Never edit an installed copy under `~/.claude/skills/`, `~/.agents/skills/`, or `~/.claude/plugins/`. Skill edits go to Jack's skills repo (`Torus403/skills`, under `skills/<name>/`) on a branch, as a PR that follows the **Opening a PR** playbook. Environment edits (checks, `CLAUDE.md`, `AGENTS.md`, tooling) go to the repo the session worked in, also as a PR. Show each destination before approval.
 
 Follow each approved row's Routing exactly:
 

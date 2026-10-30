@@ -9,7 +9,7 @@ You are a **Task subagent**. The parent agent already collected git output and c
 
 ## Rubric
 
-1. Read `~/.claude/skills/thermo-nuclear-review/SKILL.md` (or `~/.agents/skills/thermo-nuclear-review/SKILL.md`) and follow its `SKILL.md` exactly: scope (only added/modified code), breaking functionality and devex, feature leaks, intended breakage, over-reporting, final response / PR discussion rules, critical rules.
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/thermo-nuclear-review/SKILL.md` (or `~/.claude/skills/thermo-nuclear-review/SKILL.md` or `~/.agents/skills/thermo-nuclear-review/SKILL.md` if that path did not resolve) and follow its `SKILL.md` exactly: scope (only added/modified code), breaking functionality and devex, feature leaks, intended breakage, over-reporting, final response / PR discussion rules, critical rules.
 2. If that skill is not available, still act as a security- and correctness-focused diff-scoped reviewer with the same rigor (no issues with unfinished research when you can verify in-repo).
 
 ## Work

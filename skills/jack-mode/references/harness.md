@@ -4,12 +4,14 @@ These skills were written for Cursor (pstack, thermos, the team kit) and for sev
 
 ## Running another skill
 
-All skills install side by side, so every skill sits at `../<name>/SKILL.md` from any other skill's folder.
+All skills install side by side, so every skill sits at `../<name>/SKILL.md` from any other skill's folder. That holds for `install.sh` and for the `jack` plugin alike.
+
+Installed as the `jack` Claude Code plugin, every skill and subagent name gets a `jack:` prefix. Where a row below gives a bare `name`, use `jack:name` if Claude Code rejects the bare one.
 
 | A skill says | Do this |
 | --- | --- |
 | "the **name** skill", `/name`, or "call the Skill tool with name" | Read `../<name>/SKILL.md` and follow it. This works for every skill, including the ones only Jack can start, which the Skill tool refuses. |
-| Tell the user to type a skill | Claude Code: `/name`. Codex: `$name`. |
+| Tell the user to type a skill | Claude Code: `/name`, or `/jack:name` in the plugin install. Codex: `$name`. |
 
 ## Tools
 
@@ -25,8 +27,8 @@ All skills install side by side, so every skill sits at `../<name>/SKILL.md` fro
 
 | Cursor field | Claude Code | Codex |
 | --- | --- | --- |
-| `subagent_type: "poteto-agent"` or `"jack-agent"` | `subagent_type: "jack-agent"` | A subagent briefed to read `../jack-mode/SKILL.md` first |
-| `subagent_type: "comment-sicko"`, `"style-reviewer"`, or a `thermo-nuclear-*-subagent` | The same `subagent_type` | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
+| `subagent_type: "poteto-agent"` or `"jack-agent"` | `subagent_type: "jack-agent"`, or `"jack:jack-agent"` in the plugin install | A subagent briefed to read `../jack-mode/SKILL.md` first |
+| `subagent_type: "comment-sicko"`, `"style-reviewer"`, or a `thermo-nuclear-*-subagent` | The same `subagent_type`, with a `jack:` prefix in the plugin install | A subagent briefed with the body of `~/.claude/agents/<name>.md`, or do the review yourself with that body as the instructions |
 | `subagent_type: generalPurpose` | `"general-purpose"` | Any subagent |
 | `readonly: true` | `subagent_type: "Explore"`, and say "do not edit files" in the brief | Say "do not edit files" in the brief |
 | `run_in_background: true` | Omit. Subagents already run in the background. | Omit |
@@ -38,7 +40,7 @@ All skills install side by side, so every skill sits at `../<name>/SKILL.md` fro
 
 | Cursor path | Claude Code | Codex |
 | --- | --- | --- |
-| `.cursor/skills/`, `~/.cursor/skills/` | `.claude/skills/`, `~/.claude/skills/` | `.agents/skills/`, `~/.agents/skills/` |
+| `.cursor/skills/`, `~/.cursor/skills/` | `.claude/skills/`, `~/.claude/skills/`, or the plugin's copy under `~/.claude/plugins/cache/` | `.agents/skills/`, `~/.agents/skills/` |
 | `.cursor/rules/*.mdc`, always-applied rules | `CLAUDE.md` | `AGENTS.md` |
 | Chat transcripts in `~/.cursor/projects/<slug>/agent-transcripts/` | `~/.claude/projects/<slug>/<session>.jsonl`. The slug is the workspace path with each `/` and `.` changed to `-`. Read only this workspace's folder. | `~/.codex/sessions/`. Read only sessions whose working directory is this workspace. |
 
