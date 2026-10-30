@@ -10,7 +10,8 @@ The best design is the plainest one that fully works. Every extra part is a plac
 
 - **Least fancy wins.** Prefer boring, obvious code over clever code. A reader should see what it does at a glance.
 - **Count the moving parts.** Services, queues, caches, state, flags, layers, and branches all count. Between two designs that meet the need, ship the one with fewer.
-- **Least logic, no gaps.** Write the smallest amount of logic that covers every real case. Simple never means skipping an edge case, an error path, or a race.
+- **One way for every case.** Each variant is a moving part. A design where every module, regime, or caller works the same way beats one that splits per case. Before you propose a split, try to close the gap inside the uniform design. Propose the split only when the code shows the uniform design can't work, and name what rules it out.
+- **Least logic, no gaps.** Write the smallest amount of logic that covers every real case. Simple never means skipping an edge case, an error path, or a race. Close each gap inside the simplest design before you add a path for it.
 - **Robust by construction.** Prefer designs where the bad state can't happen (types, constraints, idempotent steps) over code that checks for it.
 - **Scales without rewrites.** Simple is not short-sighted. Choose the plain design that still holds at the next order of magnitude, and stop there.
 - **Elegance is the result, not the goal.** If a design needs explaining, look for a simpler one first.
