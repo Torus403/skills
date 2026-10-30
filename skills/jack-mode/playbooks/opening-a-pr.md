@@ -6,7 +6,20 @@ Invoked at the end of every other playbook that changes code.
 
 **Commits.** Conventional Commits `type(scope): subject`, no trailing period. Type such as `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `build`, or `ci`. Commit as often as is useful. Size does not matter, because the PR squash-merges. Commit bodies don't restate the subject.
 
-**Before review.** Run the **deslop** skill over the diff, then the **no-comments** skill. Then run the **thermos** skill, the **spec-review** skill, and the `style-reviewer` subagent side by side, and fix every finding that holds up. Then run the `consistency-reviewer` subagent last, on the final diff, with the goal in one sentence. It checks the repo's conventions, reuse of the existing code paths, and that every hunk serves the goal. Drop or split out each hunk it flags as out of scope, and fix the rest that holds up. Run the repo's lint, typecheck, and tests. Write the title, the description, and commit bodies with the **technical-writing** skill, then the **unslop** skill.
+**Review waterfall.** Before the PR opens, run these gates in order, one todo item each. A gate passes when its checks are green and every finding that holds up is fixed. Never start a gate before the one above it passes.
+
+1. **Clean.** The **deslop** skill over the diff, then the **no-comments** skill.
+2. **Architecture.** The **spec-review** skill. The diff builds the agreed plan in the agreed shape and follows the repo's written standards. A wrong shape goes back to the design step of the calling playbook, not to a patch.
+3. **Mechanical.** The repo's own format, lint, typecheck, and build commands, from `CLAUDE.md`, `AGENTS.md`, the package scripts, or the CI config. Zero errors and no new warnings. Never disable a rule or add an ignore to pass.
+4. **Rules.** The `style-reviewer` subagent, for Jack's style and the language's best practices.
+5. **Tests.** The repo's full test suite is green. Each new behavior has a test that fails without the change, per **principle-test-behavior-not-implementation**. A bug fix carries its repro test, and a refactor keeps its pin green. Never skip, loosen, or delete a test to pass.
+6. **Live.** The change works on the real surface at the current head, through the **control-ui** or **control-cli** skill, with the **verify-this** skill for a load-bearing claim. Write `n/a: <reason>` only when the change has no runtime surface, such as docs or skills.
+7. **Deep review.** The **thermos** skill, for bugs, security, breakage, and maintainability.
+8. **Fit and scope.** The `consistency-reviewer` subagent, on the final diff, with the goal in one sentence. It checks the repo's conventions, reuse of the existing code paths, and that every hunk serves the goal. Drop or split out each hunk it flags as out of scope.
+
+A fix sends you back up. A fix that changes the shape restarts at gate 2, and any other code change restarts at gate 3. Each gate keeps a receipt: the command and its result, or the reviewer's verdict, with the commit it ran on. Every receipt must be from the final head. Summarize them under `## Evidence`.
+
+**Prose.** Write the title, the description, and commit bodies with the **technical-writing** skill, then the **unslop** skill.
 
 **Title.** Conventional Commits `type(scope): subject`. Scope is the area. Subject is short, imperative, and names a real symbol when one carries the change, for example `feat(search): add saved searches`. The title becomes the squash commit subject.
 
