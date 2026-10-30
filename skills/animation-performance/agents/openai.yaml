@@ -1,0 +1,3 @@
+interface:
+  display_name: "Animation Performance"
+  short_description: "Fix animations that drop frames"
