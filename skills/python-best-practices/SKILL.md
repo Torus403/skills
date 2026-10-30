@@ -2,7 +2,6 @@
 name: python-best-practices
 description: Python best practices. Use when reading or editing any .py file.
 paths: ["**/*.py"]
-disable-model-invocation: true
 ---
 
 # Python best practices
