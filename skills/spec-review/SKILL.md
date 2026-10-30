@@ -25,7 +25,7 @@ Before going further, confirm the fixed point resolves (`git rev-parse <fixed-po
 Look for the originating spec, in this order:
 
 1. A path the user passed as an argument.
-2. A spec file under `docs/specs/` (or wherever `setup-repo` recorded the docs) matching the branch name or feature, plus any ADR in `docs/adr/` it links.
+2. A spec file under `.jack/specs/` matching the branch name or feature, plus any ADR in `.jack/adr/` it links. Also check the repo's tracked `docs/specs/` and `docs/adr/` if it has them.
 3. The plan agreed with Jack during grilling in this conversation. Small work has no spec file, and the agreed plan is its spec.
 4. If none of these exists, the **Spec** sub-agent will skip and report "no spec available".
 

@@ -39,7 +39,7 @@ Read the examples for the language you're writing before you write: [`examples/t
 
 ## Names
 
-- **One plain-English term per concept.** Pick one word for each idea and use it everywhere: in code, tests, logs, and docs. If the repo has a `GLOSSARY.md`, use its terms. Never use two words for one thing.
+- **One plain-English term per concept.** Pick one word for each idea and use it everywhere: in code, tests, logs, and docs. If the repo has a glossary (`.jack/GLOSSARY.md` or a tracked `GLOSSARY.md`), use its terms. Never use two words for one thing.
 - **Prefer longer, descriptive names.** `unpaidInvoicesByCustomer` beats `invs`. A name should say what the thing holds or does without a comment.
 - **No abbreviations** except ones every reader knows (`id`, `url`, `html`).
 

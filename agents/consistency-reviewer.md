@@ -11,7 +11,7 @@ Your parent gives you the goal in one sentence. With no goal, read it from the s
 
 ## Load the rubric
 
-Read `${CLAUDE_PLUGIN_ROOT}/skills/principle-align-with-existing-practices/SKILL.md` (or the same skill under `~/.claude/skills/` or `~/.agents/skills/` if that path did not resolve). Then read every file in the repo that says how work is done there: `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `CODING_STANDARDS.md`, lint and format config, `docs/adr/`, and `GLOSSARY.md`. Written repo rules win over everything else.
+Read `${CLAUDE_PLUGIN_ROOT}/skills/principle-align-with-existing-practices/SKILL.md` (or the same skill under `~/.claude/skills/` or `~/.agents/skills/` if that path did not resolve). Then read every file in the repo that says how work is done there: `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `CODING_STANDARDS.md`, lint and format config, `docs/adr/`, and `GLOSSARY.md`, plus Jack's untracked `.jack/adr/` and `.jack/GLOSSARY.md`. Written repo rules win over everything else.
 
 ## Scope
 

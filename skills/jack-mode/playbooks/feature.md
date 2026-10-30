@@ -3,7 +3,7 @@
 **You own the design. Align, grill, build, verify.** Delegate implementation where it helps. Stay in the lead.
 
 1. Align with the codebase (the **principle-align-with-existing-practices** skill). Run `how` over the affected subsystem and find the closest existing feature to copy the shape of.
-2. Grill Jack with the **grilling** skill until the design tree is empty: behavior, edge cases, data shape, UX, scope, what is out. Settle factual forks with the Prototype playbook instead of asking. For a new feature, core logic, or an architecture change, write the spec with **to-spec** (`docs/specs/<feature>.md`), and record architecture decisions and new terms with **domain-modeling**.
+2. Grill Jack with the **grilling** skill until the design tree is empty: behavior, edge cases, data shape, UX, scope, what is out. Settle factual forks with the Prototype playbook instead of asking. For a new feature, core logic, or an architecture change, write the spec with **to-spec** (`.jack/specs/<feature>.md`, never committed), and record architecture decisions and new terms with **domain-modeling**.
 3. Shape it. Name the data shape and its organizing structure per **principle-model-the-domain**. If the design crosses a function boundary, run `architect`. Pick the design with the fewest moving parts (**principle-fewest-moving-parts**). Show Jack the shape as the last grilling round, and wait for Jack to confirm the shared understanding before building.
 4. Write the throughput checkpoint as four todo items. A dimension that genuinely does not apply keeps its item with `n/a: <reason>`:
    - **Blocking first steps.** Gates run before fan-out.

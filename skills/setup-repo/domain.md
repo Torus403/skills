@@ -1,12 +1,13 @@
 # Domain Docs
 
-How the engineering skills should consume this repo's domain documentation when exploring the codebase.
+How the engineering skills should consume this repo's domain documentation when exploring the codebase. Jack's docs live in `.jack/`, which git never tracks. The repo's own tracked docs, if any, belong to its team: read them too, and never write to them.
 
 ## Before exploring, read these
 
-- **`GLOSSARY.md`** at the repo root, or
-- **`GLOSSARY-MAP.md`** at the repo root if it exists: it points at one `GLOSSARY.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
+- **`.jack/GLOSSARY.md`**, or
+- **`.jack/GLOSSARY-MAP.md`** if it exists: it points at one `GLOSSARY.md` per context under `.jack/contexts/`. Read each one relevant to the topic.
+- **`.jack/adr/`**: read ADRs that touch the area you're about to work in. In multi-context repos, also check `.jack/contexts/<context>/adr/` for context-scoped decisions.
+- The repo's tracked `GLOSSARY.md`, `GLOSSARY-MAP.md`, and `docs/adr/`, if they exist.
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
@@ -15,32 +16,31 @@ If any of these files don't exist, **proceed silently**. Don't flag their absenc
 Single-context repo (most repos):
 
 ```
-/
+.jack/
 ├── GLOSSARY.md
-├── docs/adr/
-│   ├── 0001-event-sourced-orders.md
-│   └── 0002-postgres-for-write-model.md
-└── src/
+└── adr/
+    ├── 0001-event-sourced-orders.md
+    └── 0002-postgres-for-write-model.md
 ```
 
-Multi-context repo (presence of `GLOSSARY-MAP.md` at the root):
+Multi-context repo (presence of `.jack/GLOSSARY-MAP.md`):
 
 ```
-/
+.jack/
 ├── GLOSSARY-MAP.md
-├── docs/adr/                          ← system-wide decisions
-└── src/
+├── adr/                               ← system-wide decisions
+└── contexts/
     ├── ordering/
     │   ├── GLOSSARY.md
-    │   └── docs/adr/                  ← context-specific decisions
+    │   └── adr/                       ← context-specific decisions
     └── billing/
         ├── GLOSSARY.md
-        └── docs/adr/
+        └── adr/
 ```
 
 ## Use the glossary's vocabulary
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `GLOSSARY.md`. Don't drift to synonyms the glossary explicitly avoids.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as the glossary defines it. Don't drift to synonyms the glossary explicitly avoids.
 
 If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 

@@ -7,7 +7,8 @@ Jack's agent skills for Claude Code and Codex. They are built from [pstack](http
 - **Align first.** Match how the codebase already does things before inventing anything.
 - **Plan deeply, up front.** The agent grills Jack with questions and recommendations until nothing is left to guess, then builds to the end without stopping.
 - **Simple wins.** The least fancy design with the fewest moving parts and the least logic, with no bugs, crashes, or surprises.
-- **Docs only for big things.** Specs for new features, core logic, and architecture go in `docs/specs/`. Architecture decisions go in `docs/adr/`. Small work gets none.
+- **Docs only for big things.** Specs for new features, core logic, and architecture go in `.jack/specs/`. Architecture decisions go in `.jack/adr/`. Small work gets none.
+- **Nothing extra in git.** Every file the skills write into a repo, other than the task's code, goes in the repo's `.jack/` folder. The skills keep it out of git with `.git/info/exclude`, so it never shows on GitHub and the repo's `.gitignore` stays untouched.
 - **Everything is a PR.** Branch `type/short-desc`, Conventional Commits, a conventional PR title. A feature is one big PR. Squash-merged, and only when Jack says so.
 - **Plain, readable code.** Deep modules, inlined single-use helpers, long descriptive names, blank lines between steps, and almost no comments. The **code-style** skill holds the rules and examples.
 - **Verified for real.** The change runs the way a user would run it before anyone calls it done.
@@ -40,6 +41,26 @@ cd skills
 ```
 
 `install.sh` copies every skill in `skills/` into `~/.claude/skills/` (Claude Code) and `~/.agents/skills/` (Codex), and the subagents in `agents/` into `~/.claude/agents/`. To update, run `git pull && ./install.sh`. It only replaces skills it installed, so your other skills stay put.
+
+### Cloud sessions (claude.ai/code and project threads)
+
+Cloud sessions start from a fresh clone and never install a plugin that a repo's `.claude/settings.json` turns on, so committing that file would not help. Install the skills from the environment's setup script instead. The script lives in the environment settings on claude.ai, not in any repo:
+
+```bash
+#!/bin/bash
+git clone --depth 1 https://github.com/Torus403/skills.git /tmp/jack-skills && /tmp/jack-skills/install.sh || true
+mkdir -p ~/.config/git && grep -qxF '.jack/' ~/.config/git/ignore 2>/dev/null || echo '.jack/' >> ~/.config/git/ignore
+```
+
+Add it under **Setup script** on each environment you use. For a project, pick or add that environment in the project's settings. The environment caches the script's result for about seven days, so a new commit here reaches cloud sessions within a week. Edit the script to refresh it sooner.
+
+### Your own machine
+
+The skills add `.jack/` to each clone's `.git/info/exclude` on first write. To cover every repo at once, also add it to your global git ignore file:
+
+```bash
+mkdir -p ~/.config/git && grep -qxF '.jack/' ~/.config/git/ignore 2>/dev/null || echo '.jack/' >> ~/.config/git/ignore
+```
 
 ## Use
 

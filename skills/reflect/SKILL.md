@@ -41,7 +41,7 @@ Present the synthesizer's full Accepted / Rejected / Backlog output and wait for
 
 List the Backlog items in the summary. There is no tracker. Only the Accepted list waits for approval.
 
-Never edit an installed copy under `~/.claude/skills/`, `~/.agents/skills/`, or `~/.claude/plugins/`. Skill edits go to Jack's skills repo (`Torus403/skills`, under `skills/<name>/`) on a branch, as a PR that follows the **Opening a PR** playbook. Environment edits (checks, `CLAUDE.md`, `AGENTS.md`, tooling) go to the repo the session worked in, also as a PR. Show each destination before approval.
+Never edit an installed copy under `~/.claude/skills/`, `~/.agents/skills/`, or `~/.claude/plugins/`. Skill edits go to Jack's skills repo (`Torus403/skills`, under `skills/<name>/`) on a branch, as a PR that follows the **Opening a PR** playbook. An environment edit (checks, `CLAUDE.md`, `AGENTS.md`, tooling) changes a file the worked repo tracks, so it ships there as a PR only when Jack approves that row by name. A learning only Jack's agents need belongs in a skill edit, or in the worked repo's Jack folder per the Files you write in a repo section of `../jack-mode/references/harness.md`, never in a new tracked file. Show each destination before approval.
 
 Follow each approved row's Routing exactly:
 

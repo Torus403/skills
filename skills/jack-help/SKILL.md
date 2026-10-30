@@ -18,7 +18,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | --- | --- |
 | Get interviewed about a plan until every decision is made | `/grill-me` |
 | The same, while writing ADRs and glossary terms into the repo | `/grill-with-docs` |
-| Turn the conversation into a spec file in `docs/specs/` | `/to-spec` |
+| Turn the conversation into a spec file in `.jack/specs/`, kept out of git | `/to-spec` |
 | Have the agent play back your goal before it starts | `/in-your-own-words` |
 | Make a prompt deeper before you send it | `/sharpen` |
 | Settle the types and module shape before code | `/architect` |

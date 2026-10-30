@@ -21,7 +21,7 @@ Review only the lines the diff adds or changes. Use your parent's diff, or `git 
 - **Chopped stories.** A function split into pieces that read better as one top-to-bottom function.
 - **Missing breathing room.** Logical steps run together with no blank line, or steps labeled with comments instead of blank lines.
 - **Banners.** A big file with distinct parts and no section banners, a banner in the wrong format, or banners in a small file.
-- **Names.** Short or abbreviated names, and two words for one concept (compare with the repo's existing terms and `GLOSSARY.md`).
+- **Names.** Short or abbreviated names, and two words for one concept (compare with the repo's existing terms and the glossary, `.jack/GLOSSARY.md` or a tracked `GLOSSARY.md`).
 - **Control flow.** Nesting that guard clauses would flatten, flag arguments, more than three positional parameters, hidden side effects.
 - **Clever over simple.** `reduce` chains, nested comprehensions, walrus operators, `match` statements, type gymnastics, metaprogramming, or any newer feature where plain code would do.
 - **Classes without real state.**
