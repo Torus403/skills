@@ -4,7 +4,7 @@ These need Jack's accounts, identity or relationships. Do everything around them
 
 ## Before launch
 
-1. **AI crawler policy.** Decide which AI crawlers may fetch the site, with the table in [technical.md](technical.md). Prepare: what the served robots.txt allows now. Jack sets the policy in Cloudflare's AI crawler settings, and you write any robots.txt rules.
+1. **AI crawler policy.** Decide which AI crawlers may fetch the site, with the table in the **aeo** skill's [crawlers.md](../../aeo/references/crawlers.md). Prepare: what the served robots.txt allows now. Jack sets the policy in Cloudflare's AI crawler settings, and you write any robots.txt rules.
 2. **Cloudflare dashboard settings** the repo cannot hold: Always Use HTTPS, the redirect rules, Bulk Redirects for `*.pages.dev`, Image Transformations, Crawler Hints and Web Analytics. Prepare: the exact rules, and a Terraform or API version if the project manages Cloudflare as code.
 3. **Author details.** For each byline: name, photo, a short bio, credentials, and profile links. Prepare: the author page template with placeholders.
 4. **Proof.** Real testimonials, reviews, customer logos, case studies and statistics, with permission to publish. Prepare: the slots, each marked as missing.

@@ -104,26 +104,7 @@ Only when the site serves more than one language or region:
 
 Google's AI Overviews and AI Mode use the normal index. They need no special file, markup or schema: a page that is indexed and allowed a snippet is eligible. `nosnippet`, `data-nosnippet`, `max-snippet` and `noindex` limit what Google shows.
 
-Other assistants run their own crawlers, each with a separate robots.txt token. Blocking a training crawler does not remove the site from that company's search:
-
-| Token | Company | Purpose |
-| --- | --- | --- |
-| `Googlebot` | Google | Search, including AI Overviews |
-| `Google-Extended` | Google | Gemini training and grounding. No effect on Search |
-| `Bingbot` | Microsoft | Bing search, which also serves other engines and assistants |
-| `OAI-SearchBot` | OpenAI | ChatGPT search results |
-| `ChatGPT-User` | OpenAI | Fetches a page when a user asks |
-| `GPTBot` | OpenAI | Training |
-| `Claude-SearchBot` | Anthropic | Claude search results |
-| `Claude-User` | Anthropic | Fetches a page when a user asks |
-| `ClaudeBot` | Anthropic | Training |
-| `PerplexityBot` | Perplexity | Perplexity search |
-| `Applebot-Extended` | Apple | Opts out of Apple's AI training. Siri and Spotlight follow `Applebot` |
-
-- Allow every search and user-fetch crawler by default. Whether to allow training crawlers is Jack's call.
-- Cloudflare can prepend its own rules to robots.txt and block AI crawlers at the edge. Read the served `/robots.txt`, not the file in the repo.
-- `llms.txt` is an optional proposal. No major search engine needs it, and Google says AI text files are unnecessary. Add one only when Jack asks.
-- Vendors rename crawlers. Check the vendor's current crawler page before writing a rule for one.
+Other assistants run their own crawlers, each with a separate robots.txt token, and Cloudflare can block them at the edge. The **aeo** skill owns the crawler table, the robots.txt policy, llms.txt, and the access check script.
 
 ## Checks
 
