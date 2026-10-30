@@ -44,6 +44,39 @@ Installed as the `jack` Claude Code plugin, every skill and subagent name gets a
 | `.cursor/rules/*.mdc`, always-applied rules | `CLAUDE.md` | `AGENTS.md` |
 | Chat transcripts in `~/.cursor/projects/<slug>/agent-transcripts/` | `~/.claude/projects/<slug>/<session>.jsonl`. The slug is the workspace path with each `/` and `.` changed to `-`. Read only this workspace's folder. | `~/.codex/sessions/`. Read only sessions whose working directory is this workspace. |
 
+## Files you write in a repo
+
+Nothing these skills write into a repo is tracked by git or reaches GitHub. The code change a task asks for is the one exception: it ships on its branch as usual. Commit any other file only when Jack asks for that file by name.
+
+Everything else goes in the **Jack folder**: `.jack/` at the root of the repo's main checkout. Before the first write in a session, run this from anywhere in the repo:
+
+```bash
+common="$(git rev-parse --path-format=absolute --git-common-dir)"
+jack="$(dirname "$common")/.jack"
+mkdir -p "$jack" "$common/info"
+grep -qxF '/.jack/' "$common/info/exclude" 2>/dev/null || echo '/.jack/' >> "$common/info/exclude"
+```
+
+`.git/info/exclude` is git's own ignore list for one clone. Git never commits it, every worktree of the clone shares it, and the repo's `.gitignore` stays untouched. Never add the Jack folder to `.gitignore`, and never `git add -f` a file in it.
+
+| File | Path |
+| --- | --- |
+| Spec | `.jack/specs/<feature>.md` |
+| ADR | `.jack/adr/NNNN-slug.md` |
+| Glossary | `.jack/GLOSSARY.md`. For several contexts, `.jack/GLOSSARY-MAP.md` plus `.jack/contexts/<context>/GLOSSARY.md` and `.jack/contexts/<context>/adr/` |
+| How skills read the domain docs | `.jack/domain.md` |
+| Decision log | `.jack/audit/<task-slug>.tsv` |
+| Wizard, one-off script, notes | `.jack/scratch/<task-slug>/` |
+| Prototype, evidence, screenshots | The OS temp dir as the skill says, or `.jack/scratch/<task-slug>/` when it must sit beside the code |
+
+A generated project skill has to sit where the harness loads it: `.claude/skills/<name>/` and its `.agents/skills/<name>` symlink. Add both to the same exclude file with the same `grep -qxF ... || echo ...` line, as `/.claude/skills/<name>/` and `/.agents/skills/<name>`.
+
+The repo's tracked docs (`GLOSSARY.md`, `docs/adr/`, `docs/specs/`, `CLAUDE.md`, `AGENTS.md`) belong to the repo's team. Read them alongside the Jack folder, and where the two disagree, say so. Never edit or add to them unless Jack asks.
+
+Before every commit, run `git status --porcelain` and confirm that only the task's code is staged.
+
+A cloud session starts from a fresh clone, so its Jack folder starts empty and goes away with the session. Put anything Jack should keep in the reply, or in the session's shared or persistent folder if it has one.
+
 ## Cursor-only features
 
 Claude Code and Codex have no Bugbot, Cursor Automations, Cursor cloud agents, Origin, or built-in PR tool. When a step needs one, put one line in your reply, `Skipped: <step>. <reason>.`, and go on. Use `gh` for every PR operation.

@@ -8,7 +8,7 @@ Invoked at the end of every other playbook that changes code.
 
 **Review waterfall.** Before the PR opens, run these gates in order, one todo item each. A gate passes when its checks are green and every finding that holds up is fixed. Never start a gate before the one above it passes.
 
-1. **Clean.** The **deslop** skill over the diff, then the **no-comments** skill.
+1. **Clean.** The **deslop** skill over the diff, then the **no-comments** skill. The diff holds only the task's code: no spec, ADR, glossary, log, note, or generated skill (see Files you write in a repo in `../references/harness.md`).
 2. **Architecture.** The **spec-review** skill. The diff builds the agreed plan in the agreed shape and follows the repo's written standards. A wrong shape goes back to the design step of the calling playbook, not to a patch.
 3. **Mechanical.** The repo's own format, lint, typecheck, and build commands, from `CLAUDE.md`, `AGENTS.md`, the package scripts, or the CI config. Zero errors and no new warnings. Never disable a rule or add an ignore to pass.
 4. **Rules.** The `style-reviewer` subagent, for Jack's style and the language's best practices.
@@ -34,7 +34,7 @@ A fix sends you back up. A fix that changes the shape restarts at gate 2, and an
 - `## Tradeoffs`: only alternatives a reviewer would otherwise ask about. Skip when there was no real choice.
 - `## Blast Radius`: one-way or two-way door, then 1 to 2 sentences on who or what it touches and why that is safe or risky.
 
-Link the spec or ADR when there is one. The body becomes the squash commit body, so keep it under about 40 lines.
+The spec and ADRs live in the untracked Jack folder, so never link them. Put what a reviewer needs from them in the body. The body becomes the squash commit body, so keep it under about 40 lines.
 
 **Open it.** Use `gh pr create`, ready, never a draft. Run `gh pr view <number>` before you refer to PR status.
 

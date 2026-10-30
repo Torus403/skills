@@ -1,22 +1,22 @@
 ---
 name: to-spec
-description: "Turn the current conversation into a spec file in docs/specs/: no interview, just synthesis of what you've already discussed. For new features, core logic, and architecture only."
+description: "Turn the current conversation into a spec file in .jack/specs/, kept out of git: no interview, just synthesis of what you've already discussed. For new features, core logic, and architecture only."
 disable-model-invocation: true
 ---
 
-Adapted from Matt Pocock's `to-spec`. This skill takes the current conversation and your understanding of the codebase and writes a spec into the repo. Do NOT interview the user. Synthesize what you already know. The grilling already happened.
+Adapted from Matt Pocock's `to-spec`. This skill takes the current conversation and your understanding of the codebase and writes a spec into the Jack folder, which git never tracks. Do NOT interview the user. Synthesize what you already know. The grilling already happened.
 
 Specs are for big things only: a new feature, core logic, or an architecture change. If the work is small, say so and stop. The agreed plan in the conversation is enough.
 
 ## Process
 
-1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching. Read `docs/agents/domain.md` if it exists.
+1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching. Read `.jack/domain.md` if it exists.
 
 2. Sketch the seams at which you're going to test the feature. Prefer existing seams to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better. The ideal number is one.
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec with the template below to `docs/specs/<feature>.md`, with `<feature>` in kebab case. If the repo keeps specs somewhere else, follow the repo. Commit it on the feature's branch, so the spec ships in the same PR as the code. Link it from the PR description.
+3. Write the spec with the template below to `.jack/specs/<feature>.md`, with `<feature>` in kebab case. That is the Jack folder, `.jack/`, which stays out of git (set it up per the Files you write in a repo section of `../jack-mode/references/harness.md`). Never commit the spec, never put it in the repo's own docs folder, and never link it from a PR. Tell Jack its path.
 
 <spec-template>
 
