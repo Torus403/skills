@@ -1,6 +1,6 @@
 # Worst-Case Catalog
 
-Realistic values that break UI, grouped by what kind of value the component renders. Use the rows that apply to the fields in your field map. Each value is something a real user could produce; the note says what it tends to break.
+Realistic values that break UI, grouped by what kind of value the component renders. Use the rows that apply to the fields in your Phase 1 table. Each value is something a real user could produce; the note says what it tends to break.
 
 Use `example.com`, `example.org`, or `.test` domains for emails and URLs, so the fixture never points at a real inbox or site.
 
@@ -133,7 +133,3 @@ Not data, but checked the same way: flip to the worst case, then change these.
 | Dark mode | Hardcoded colors, invisible borders and logos |
 | `dir="rtl"` | Icons, chevrons, padding, and the order of trailing actions |
 | Touch device | Hover-only actions (the ••• that appears on hover) are unreachable |
-
----
-
-From [break-ui](https://github.com/emilkowalski/skills/tree/main/skills/break-ui) by Emil Kowalski (MIT).

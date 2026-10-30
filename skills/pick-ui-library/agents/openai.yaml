@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pick UI Library"
+  short_description: "Pick a trusted library for a frontend task"
+policy:
+  allow_implicit_invocation: false

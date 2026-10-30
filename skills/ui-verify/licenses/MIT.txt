@@ -1,6 +1,5 @@
 MIT License
 
-Copyright (c) 2026 Emil Kowalski
 Copyright (c) 2026 Jakub Krehel
 Copyright (c) 2025 Vercel Labs
 

@@ -8,7 +8,7 @@ license: MIT AND CC-BY-4.0, see NOTICE.md
 
 Checks the UI the way users meet it: rendered, at every width, with real and worst-case data, by mouse and keyboard. A claim you did not look at is not verified. Sources and licenses are in [NOTICE.md](NOTICE.md).
 
-Verification reads and reports. It edits nothing, except the dev-only worst-case fixtures, unless you are fixing your own build or Jack asks for fixes.
+Verification reads and reports. It edits nothing, except the dev-only worst-case fixtures and toggle, unless you are fixing your own build or Jack asks for fixes.
 
 ## 1. Resolve the scope
 
@@ -32,7 +32,7 @@ Compare each render with the approved plan or the design file, element by elemen
 
 ## 3. Break it
 
-Follow [references/break.md](references/break.md). Done when every rendered value has been tried with worst-case, empty, one and huge data.
+Run the **break-ui** skill on every new or changed component and screen. Done when every rendered value has been tried with worst-case, empty, one and huge data, and every break has a fix.
 
 ## 4. Check the rules
 
@@ -41,6 +41,8 @@ Walk the code and the renders against each source, and cite `path/to/file:line` 
 - Every rule in [`../ui-build/references/web-interface-guidelines.md`](../ui-build/references/web-interface-guidelines.md).
 - The sizing standards in [`../ui-build/references/tokens.md`](../ui-build/references/tokens.md). Measure contrast, target sizes and line lengths on the render.
 - The signs and the Defaults in [`../ui-design/references/signs.md`](../ui-design/references/signs.md).
+- The **review-animations** skill for every animation, and the **animation-performance** skill when one drops frames.
+- The **mobile-native** skill for anything used on a phone.
 - The tells in [`../ui-build/references/dashboards.md`](../ui-build/references/dashboards.md) for an Operate screen.
 
 ## 5. Check consistency
@@ -89,6 +91,6 @@ Add a `Status` column for a change review. Mark every check you could not run as
 - [ ] Solid surfaces, one accent, line icons from one set, no emoji in the interface
 - [ ] Numbers in one format with tabular figures, right-aligned in tables
 - [ ] Hover, focus, pressed, disabled, loading, empty and error states exist
-- [ ] No decorative motion, and reduced motion respected
+- [ ] Every animation passes the **review-animations** skill
 - [ ] Matches the sibling screens, or each difference is named
 - [ ] Template check: swap the product name for another product's. If the screen still fits, the direction needs pushing in the copy, the visual or the signature detail

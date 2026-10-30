@@ -135,10 +135,12 @@ lucide, 16 or 18px, stroke 1.5, color of the muted or secondary text role, 8 to 
 
 ## Motion
 
-Define one curve and a few durations once, as tokens:
+Define the curves and durations once, as tokens. The values come from the **emil-design-eng** skill, which says when to use each:
 
 ```css
 --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 --duration-press: 160ms;
 --duration-menu: 200ms;
 --duration-sheet: 300ms;

@@ -57,6 +57,12 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Study how the best products solve a screen, on Mobbin | `ui-research` |
 | Build UI with the project's tokens, sizing standards and consistency | `ui-build` |
 | Check UI rendered, with worst-case data, accessibility and the guidelines | `ui-verify` |
+| Build or review an animation | `animate`, `/review-animations` |
+| Fix animations that drop frames | `animation-performance` |
+| Make a web app feel native on a phone | `mobile-native` |
+| Pick a trusted library for a frontend task | `/pick-ui-library` |
+| Stress-test UI with worst-case data | `break-ui` |
+| Read Emil Kowalski's design engineering rules | `emil-design-eng` |
 | Walk a human through steps only they can do | `wizard` |
 | Keep a decision log for a long run | `/show-me-your-work` |
 

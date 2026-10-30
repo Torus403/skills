@@ -41,6 +41,8 @@ Read these before the first line of code, and apply them to every line:
 - [references/web-interface-guidelines.md](references/web-interface-guidelines.md). Every MUST and NEVER is a requirement.
 - The sizing standards in [references/tokens.md](references/tokens.md).
 - [references/dashboards.md](references/dashboards.md) for an Operate screen: dashboards, admin, settings, lists.
+- The **animate** skill for anything that moves, with the rules in the **emil-design-eng** skill. The **animation-performance** skill when an animation drops frames.
+- The **mobile-native** skill for anything used on a phone.
 
 Then build:
 
@@ -49,7 +51,7 @@ Then build:
 
 Build only what the design shows. Leave everything around it as it was: no neighbouring copy edits, no icon swaps, no cleanups on the way. A diff wider than the design is the most common way this goes wrong.
 
-Use the project's accessible primitives, like Radix, React Aria or Base UI, for anything with keyboard or focus behavior, and never rebuild that behavior by hand. Native elements come first: `button`, `a`, `label`, `table`.
+When the project lacks a component, pick it with the **pick-ui-library** skill before building one by hand. Use the project's accessible primitives, like Radix, React Aria or Base UI, for anything with keyboard or focus behavior, and never rebuild that behavior by hand. Native elements come first: `button`, `a`, `label`, `table`.
 
 Where the backend for part of the design does not exist yet, build that part fed by props and list it as unwired.
 
