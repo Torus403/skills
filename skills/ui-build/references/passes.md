@@ -103,7 +103,12 @@ Exact values for every pass are in [tokens.md](tokens.md).
 
 ## 9. Motion
 
-Follow [motion.md](motion.md). Most screens need far less motion than you think: a press, a menu, and at most one entrance.
+Keep motion to a minimum. Most screens need none beyond what the components already do.
+
+- Animate only to show a change or confirm an action, like a menu opening or a press. Nothing loops, bounces, floats or flies in, and keyboard shortcuts never animate.
+- Transition named properties, never `transition: all`, and animate only `transform` and `opacity`.
+- Use the easing and durations from the tokens, under 300ms.
+- Respect `prefers-reduced-motion`.
 
 ---
 

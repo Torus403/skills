@@ -1,6 +1,6 @@
 ---
 name: ui-build
-description: Build UI to an approved design with the project's tokens and components, exact sizing standards and consistent motion. Use when writing or changing the code of any website, dashboard, component or app screen, including building from a Figma file or a design image.
+description: Build UI to an approved design with the project's tokens and components, exact sizing standards and consistency. Use when writing or changing the code of any website, dashboard, component or app screen, including building from a Figma file or a design image.
 license: CC-BY-4.0 AND MIT AND Apache-2.0, see NOTICE.md
 ---
 
@@ -40,7 +40,6 @@ Read these before the first line of code, and apply them to every line:
 
 - [references/web-interface-guidelines.md](references/web-interface-guidelines.md). Every MUST and NEVER is a requirement.
 - The sizing standards in [references/tokens.md](references/tokens.md).
-- [references/motion.md](references/motion.md) for anything that moves.
 - [references/dashboards.md](references/dashboards.md) for an Operate screen: dashboards, admin, settings, lists.
 
 Then build:

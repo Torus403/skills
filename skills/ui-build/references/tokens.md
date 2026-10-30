@@ -135,12 +135,10 @@ lucide, 16 or 18px, stroke 1.5, color of the muted or secondary text role, 8 to 
 
 ## Motion
 
-The curves and durations live in [motion.md](motion.md). Define them once as tokens:
+Define one curve and a few durations once, as tokens:
 
 ```css
 --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
---ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
---ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 --duration-press: 160ms;
 --duration-menu: 200ms;
 --duration-sheet: 300ms;

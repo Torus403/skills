@@ -26,7 +26,7 @@ Render with the **control-ui** skill:
 - In every theme the product has, and in RTL when it supports it.
 - Every state: hover, focus, pressed, disabled, loading, empty, error, and the first-time user.
 - By keyboard alone: tab through every control, open and close every menu and dialog, and check focus moves, traps and returns.
-- With `prefers-reduced-motion: reduce` emulated, and with motion slowed down to check easing and origin.
+- With `prefers-reduced-motion: reduce` emulated.
 
 Compare each render with the approved plan or the design file, element by element. "Gap is 12px, design is 16px" is a finding. "Feels a bit tight" is not.
 
@@ -41,7 +41,6 @@ Walk the code and the renders against each source, and cite `path/to/file:line` 
 - Every rule in [`../ui-build/references/web-interface-guidelines.md`](../ui-build/references/web-interface-guidelines.md).
 - The sizing standards in [`../ui-build/references/tokens.md`](../ui-build/references/tokens.md). Measure contrast, target sizes and line lengths on the render.
 - The signs and the Defaults in [`../ui-design/references/signs.md`](../ui-design/references/signs.md).
-- [`../ui-build/references/motion.md`](../ui-build/references/motion.md) for anything that moves.
 - The tells in [`../ui-build/references/dashboards.md`](../ui-build/references/dashboards.md) for an Operate screen.
 
 ## 5. Check consistency
@@ -90,6 +89,6 @@ Add a `Status` column for a change review. Mark every check you could not run as
 - [ ] Solid surfaces, one accent, line icons from one set, no emoji in the interface
 - [ ] Numbers in one format with tabular figures, right-aligned in tables
 - [ ] Hover, focus, pressed, disabled, loading, empty and error states exist
-- [ ] Motion follows the motion rules and respects reduced motion
+- [ ] No decorative motion, and reduced motion respected
 - [ ] Matches the sibling screens, or each difference is named
 - [ ] Template check: swap the product name for another product's. If the screen still fits, the direction needs pushing in the copy, the visual or the signature detail
