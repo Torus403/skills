@@ -1,0 +1,3 @@
+interface:
+  display_name: "AEO"
+  short_description: "Get a site cited by ChatGPT, Google AI, Claude and Perplexity"

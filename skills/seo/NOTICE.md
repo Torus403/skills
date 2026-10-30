@@ -4,7 +4,7 @@ This skill adapts work by others. Each source keeps its license, and the changes
 
 | Source | Author | License | Used in |
 | --- | --- | --- | --- |
-| [web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Addy Osmani | [MIT](licenses/MIT.txt) | `references/performance.md`, from core-web-vitals; the audit order in `SKILL.md`, the AI crawler table and the `llms.txt` stance in `references/technical.md`, and `references/structured-data.md`, from seo |
+| [web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Addy Osmani | [MIT](licenses/MIT.txt) | `references/performance.md`, from core-web-vitals; the audit order in `SKILL.md`, and `references/structured-data.md`, from seo |
 | [marketingskills](https://github.com/coreyhaines31/marketingskills) | Corey Haines | [MIT](licenses/MIT.txt) | The title patterns in `references/on-page.md`, the new page checklist in `SKILL.md`, and the intent, cannibalization and after-launch sections of `references/content.md`, from seo-audit |
 | [claude-seo](https://github.com/AgriciDaniel/claude-seo) | agricidaniel | [MIT](licenses/MIT.txt) | The rendering and pagination rules in `references/technical.md`, from seo-technical |
 | [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/react/guide/seo) | Tanner Linsley and contributors | [MIT](licenses/MIT.txt) | The code in `references/stack.md` |
