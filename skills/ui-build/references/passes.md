@@ -33,7 +33,7 @@ Exact values for every pass are in [tokens.md](tokens.md).
 
 ## 3. Icons
 
-- Every emoji used as an icon or decoration becomes a line icon from one set. Use the set the project already has, otherwise lucide.
+- Every emoji used as an icon or decoration becomes a line icon from one set. Use the set the project already has, otherwise lucide, which shadcn/ui uses.
 - One size and one stroke everywhere, 16 or 18px with a 1.5 stroke, in `currentColor`.
 - Icons take the color of their text role, usually secondary or muted, and take hover, selected and disabled states from that color.
 - The icon box has the same width in every row and the gap to the label is fixed, 8 or 10, so labels align.

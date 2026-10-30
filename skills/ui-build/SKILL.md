@@ -32,7 +32,7 @@ Read the project's tokens, theme and component library before writing anything. 
 
 Stop and ask Jack when rounding would visibly change the design: more than 2px on spacing or size, or a color landing on a different step.
 
-When the project has no tokens, or they miss a role, define them once in the project's own place, like CSS variables or the Tailwind theme, from [references/tokens.md](references/tokens.md). From here on every value comes from a token.
+When the project has no tokens, or they miss a role, define them once as shadcn/ui theme variables in the global CSS (`--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--ring`, `--radius` and the rest), plus spacing, type and motion tokens, from [references/tokens.md](references/tokens.md). From here on every value comes from a token.
 
 ## 3. Build
 
@@ -51,7 +51,7 @@ Then build:
 
 Build only what the design shows. Leave everything around it as it was: no neighbouring copy edits, no icon swaps, no cleanups on the way. A diff wider than the design is the most common way this goes wrong.
 
-When the project lacks a component, pick it with the **pick-ui-library** skill before building one by hand. Use the project's accessible primitives, like Radix, React Aria or Base UI, for anything with keyboard or focus behavior, and never rebuild that behavior by hand. Native elements come first: `button`, `a`, `label`, `table`.
+Components are shadcn/ui. Use the project's shadcn components, and add a missing one with `npx shadcn@latest add <component>` instead of building it by hand or bringing in another component library. Compose and restyle them through the theme tokens and their variants. Never rebuild keyboard or focus behavior by hand. Use the **pick-ui-library** skill only for what shadcn/ui does not cover, like number animation or virtualization. Where its list names a component library, shadcn/ui wins.
 
 Where the backend for part of the design does not exist yet, build that part fed by props and list it as unwired.
 

@@ -48,7 +48,7 @@ Walk the code and the renders against each source, and cite `path/to/file:line` 
 ## 5. Check consistency
 
 - **Tokens.** Search the diff for hex codes, raw `px` values, Tailwind arbitrary values like `w-[13px]`, arbitrary `z-*`, and durations or easings outside the tokens. Each is a finding unless it exactly centers something.
-- **Components.** Find any hand-built control that duplicates one the project has, and any new component that should extend an existing one.
+- **Components.** Every control is a shadcn/ui component. Find any hand-built control or other component library that duplicates one, and any new component that should extend an existing one.
 - **Siblings.** Open two sibling screens beside the new one at the same width. Page header, padding, section spacing, table rows, form layout, the place of the primary action and the wording of shared labels match, or the difference is deliberate and named.
 - **Behavior.** The same states behave the same way as on the siblings.
 
