@@ -43,6 +43,7 @@ Read these before the first line of code, and apply them to every line:
 - [references/dashboards.md](references/dashboards.md) for an Operate screen: dashboards, admin, settings, lists.
 - The **animate** skill for anything that moves, with the rules in the **emil-design-eng** skill. The **animation-performance** skill when an animation drops frames.
 - The **mobile-native** skill for anything used on a phone.
+- The **seo** skill's new page checklist for any public page: server-rendered content, a unique title and description, a canonical, one H1 and real links.
 
 Then build:
 
