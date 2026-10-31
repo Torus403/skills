@@ -33,7 +33,7 @@ These are always judgement calls, whatever the precedent says:
 - **Data models and database design.** Propose the full shape: every table or model, every column with its type, nullability, keys, and indexes, the relations, and why each one is needed. Show which existing model you copied it from. The user reviews and approves every model before you build.
 - **Anything a user sees or reads.** Pages, views, components, emails, notifications, copy, and error messages. Propose and recommend, then wait for the user's approval.
 - **Product behavior and scope.** What the feature does, its edge cases, and what is out.
-- **Hard-to-undo steps.** Migrations that drop or rewrite data, public APIs, and anything shipped outside the repo.
+- **Hard-to-undo steps.** Migrations that drop or rewrite data, public APIs, and anything shipped outside the repo. Ask, but recommend the migration or contract change when it gives the cleaner design. Never steer away from one only because it is a migration.
 - **Conflicting precedent.** Where the codebase does it two ways, picking one is a convention decision.
 
 When unsure whether something is your call, ask it.

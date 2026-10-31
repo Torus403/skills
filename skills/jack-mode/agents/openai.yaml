@@ -1,5 +1,5 @@
 interface:
   display_name: "Jack Mode"
-  short_description: "Jack's way of working"
+  short_description: "Jack's way of working, routing to every skill"
 policy:
   allow_implicit_invocation: false
