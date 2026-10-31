@@ -1,12 +1,23 @@
 ---
 name: jack-mode
-description: Jack's way of working. Align with the codebase, grill until the plan is clear, then build it to the end, verify it for real, and ship one conventional PR. Use for /jack-mode or $jack-mode.
+description: Jack's way of working, and the router into every other skill in this repo. Align with the codebase, grill until the plan is clear, then build it to the end, verify it for real, and ship one conventional PR. Use for /jack-mode or $jack-mode.
 disable-model-invocation: true
 ---
 
 # Jack mode
 
 Bundled skills live at `../<name>/SKILL.md` from this file, so put this file's absolute path in every `jack-agent` brief. Read [`references/harness.md`](references/harness.md) once per session. It maps the tool names in these skills to Claude Code and Codex.
+
+## Routing
+
+This skill is a router. Its standing rules and the one-line principles below are in force on every task. Each trigger in the Non-negotiables names a skill. When the trigger fires, read that skill and apply it. Jack never has to name a skill. When the task touches an area no trigger covers, scan the tables in the **jack-help** skill, read every skill that fits, and apply it. In your reply, name the skills you pulled in.
+
+## Standing rules
+
+These hold on every task under this skill. They override any bundled skill that says otherwise.
+
+- **No tests unless Jack asks.** Never write, add, or suggest a test, a test file, a test plan, or an "add a test for this" follow-up unless Jack asks for tests in this task. Tests come in one final pass, once the product is built and decided. Before that they are low value and keep needing rewrites. This overrides the **tdd** skill, the regression test in the **diagnosing-bugs** skill, the Testing Decisions in the **to-spec** skill, the pin in the Refactoring playbook, and the Tests gate in the Opening a PR playbook. Prove the work by running the real thing instead: the control skills, the **verify-this** skill, and throwaway repro or equivalence scripts in the Jack folder, never committed. The existing test suite still runs. A test that breaks because the behavior changed on purpose gets updated or deleted in the same change. Never loosen a test to hide a real bug.
+- **Default to yes on migrations and contract changes.** Most of Jack's work is pre-launch. When a feature or a deletion is cleaner with a database migration, a data backfill, a schema change, or a changed API contract, propose it and build it as part of the change. Never push back only because the change needs a migration or breaks a contract. Never keep a dead column, field, endpoint, or compatibility shim to avoid one. Migrate every caller and delete the old shape in the same wave (**principle-migrate-callers-then-delete-legacy-apis**). Name each migration and contract change in the grilling round and in the PR's `## Blast Radius`, so Jack can push back. Writing a migration is reversible. Running it against a shared or production database is not, and still waits for Jack.
 
 ## The flow
 
@@ -89,7 +100,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 - **Prove It Works.** After a task, before declaring done. Verify against the real artifact, not a proxy or "it compiles".
 - **Fix Root Causes.** Debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only when the state it handles is legitimate.
 - **Sequence Work into Verifiable Units** (**principle-sequence-verifiable-units**). Multi-step work and how you order commits. Break work into small units that each end in a check, verify each before the next, and order commits so the sequence proves itself.
-- **Test Behavior, Not Implementation.** Writing, changing, or keeping a test. Assert what the code's users can observe.
+- **Test Behavior, Not Implementation.** Writing, changing, or keeping a test, which happens only when Jack asks for tests or an existing test breaks. Assert what the code's users can observe.
 - **Explain the Number.** Before you trust, report, or act on a number you measured. Find what limits it, and rule out that it measured something other than the work you think.
 
 **Delegation**
@@ -108,7 +119,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 **Always pause** for irreversible actions: merging, force-pushing a shared branch, deploys, data deletion, and messages sent outside the repo.
 
-**No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Push back when something doesn't earn its place. Candor over agreement.
+**No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Push back when something doesn't earn its place. Candor over agreement. A migration or a contract change is a cost, not a reason to say no (Standing rules).
 
 ## Subagents
 

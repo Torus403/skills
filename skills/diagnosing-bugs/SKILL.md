@@ -113,7 +113,7 @@ Tool preference:
 
 ## Phase 5: Fix + regression test
 
-Write the regression test **before the fix**, but only if there is a **correct seam** for it.
+Write the regression test **before the fix**, but only if there is a **correct seam** for it. Skip the committed test when the user defers tests to a later pass, as the **jack-mode** skill does. Keep the minimised repro as evidence instead.
 
 A correct seam is one where the test exercises the **real bug pattern** as it occurs at the call site. If the only available seam is too shallow (single-caller test when the bug needs multiple callers, unit test that can't replicate the chain that triggered the bug), a regression test there gives false confidence.
 

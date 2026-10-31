@@ -12,7 +12,7 @@ Invoked at the end of every other playbook that changes code.
 2. **Architecture.** The **spec-review** skill. The diff builds the agreed plan in the agreed shape and follows the repo's written standards. A wrong shape goes back to the design step of the calling playbook, not to a patch.
 3. **Mechanical.** The repo's own format, lint, typecheck, and build commands, from `CLAUDE.md`, `AGENTS.md`, the package scripts, or the CI config. Zero errors and no new warnings. Never disable a rule or add an ignore to pass.
 4. **Rules.** The `style-reviewer` subagent, for Jack's style and the language's best practices.
-5. **Tests.** The repo's full test suite is green. Each new behavior has a test that fails without the change, per **principle-test-behavior-not-implementation**. A bug fix carries its repro test, and a refactor keeps its pin green. Never skip, loosen, or delete a test to pass.
+5. **Tests.** The repo's existing test suite is green. Add no tests unless Jack asked for them (Standing rules in `../SKILL.md`). A test that broke because the behavior changed on purpose is updated or deleted in this PR. Never skip or loosen a test to hide a real bug. When Jack did ask for tests, each new behavior has one that fails without the change, per **principle-test-behavior-not-implementation**.
 6. **Live.** The change works on the real surface at the current head, through the **control-ui** or **control-cli** skill, with the **verify-this** skill for a load-bearing claim. Write `n/a: <reason>` only when the change has no runtime surface, such as docs or skills.
 7. **Deep review.** The **thermos** skill, for bugs, security, breakage, and maintainability.
 8. **Fit and scope.** The `consistency-reviewer` subagent, on the final diff, with the goal in one sentence. It checks the repo's conventions, reuse of the existing code paths, and that every hunk serves the goal. Drop or split out each hunk it flags as out of scope.
@@ -30,9 +30,9 @@ A fix sends you back up. A fix that changes the shape restarts at gate 2, and an
 - `## Why`: Jack's goal and the problem, 1 to 3 short sentences.
 - `## Summary`: the smallest visual that makes the change clear, per the **pr** skill: a call tree, file tree, component tree, pseudocode, a `diff` sketch, or a Mermaid diagram.
 - `## What changed`: 1 to 5 short bullets. Name a real symbol or path only when it carries the change.
-- `## Evidence`: before and after. Screenshots for a visual change. Otherwise the test or command that failed and now passes, or the real run and its output.
+- `## Evidence`: before and after. Screenshots for a visual change. Otherwise the repro or command that failed and now passes, or the real run and its output.
 - `## Tradeoffs`: only alternatives a reviewer would otherwise ask about. Skip when there was no real choice.
-- `## Blast Radius`: one-way or two-way door, then 1 to 2 sentences on who or what it touches and why that is safe or risky.
+- `## Blast Radius`: one-way or two-way door, then 1 to 2 sentences on who or what it touches and why that is safe or risky. Name every migration and API contract change.
 
 The spec and ADRs live in the untracked Jack folder, so never link them. Put what a reviewer needs from them in the body. The body becomes the squash commit body, so keep it under about 40 lines.
 

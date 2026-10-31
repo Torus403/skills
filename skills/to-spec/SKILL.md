@@ -12,7 +12,7 @@ Specs are for big things only: a new feature, core logic, or an architecture cha
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching. Read `.jack/domain.md` if it exists.
 
-2. Sketch the seams at which you're going to test the feature. Prefer existing seams to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better. The ideal number is one.
+2. Only when the user asked for tests in this work, sketch the seams at which you're going to test the feature. Prefer existing seams to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better. The ideal number is one.
 
 Check with the user that these seams match their expectations.
 
@@ -57,6 +57,8 @@ Do NOT include specific file paths or code snippets. They go stale quickly.
 Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim it to the decision-rich parts.
 
 ## Testing Decisions
+
+Include this section only when the user asked for tests in this work. Under the **jack-mode** skill, tests wait for a final pass.
 
 - What makes a good test here (only test external behavior, not implementation details)
 - Which modules will be tested, at which seams
