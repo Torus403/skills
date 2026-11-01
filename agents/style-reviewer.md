@@ -21,10 +21,13 @@ Review only the lines the diff adds or changes. Use your parent's diff, or `git 
 - **Chopped stories.** A function split into pieces that read better as one top-to-bottom function.
 - **Missing breathing room.** Logical steps run together with no blank line, or steps labeled with comments instead of blank lines.
 - **Banners.** A big file with distinct parts and no section banners, a banner in the wrong format, or banners in a small file.
-- **Names.** Short or abbreviated names, and two words for one concept (compare with the repo's existing terms and the glossary, `.jack/GLOSSARY.md` or a tracked `GLOSSARY.md`).
+- **Names.** Short or abbreviated names, and two words for one concept (compare with the repo's existing terms and the glossary, `GLOSSARY.md`).
 - **Control flow.** Nesting that guard clauses would flatten, flag arguments, more than three positional parameters, hidden side effects.
 - **Clever over simple.** `reduce` chains, nested comprehensions, walrus operators, `match` statements, type gymnastics, metaprogramming, or any newer feature where plain code would do.
 - **Classes without real state.**
+- **Errors, assertions, and limits.** A swallowed error, an error turned into a default value, an unbounded loop over outside data, a magic number that should be a named limit, a missing timeout on a network call, an assertion used to check outside input.
+- **Units, time, and money.** A number with a unit and no unit in its name, local time stored or compared, money as a float.
+- **Long functions.** A new function past about 80 lines. Ask whether it still reads as one story. Mark it `judgement`: length alone is not a finding.
 - **Comments** that narrate, label steps, or justify at length. Leave a short, true *why* or location comment alone.
 
 ## Report

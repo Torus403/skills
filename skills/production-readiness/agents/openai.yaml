@@ -1,0 +1,3 @@
+interface:
+  display_name: "Production Readiness"
+  short_description: "Logs, metrics, health checks, alerts, rollback, and a runbook before launch"

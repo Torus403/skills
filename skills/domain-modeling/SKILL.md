@@ -5,25 +5,25 @@ description: Build and sharpen a project's domain model. Use when discussing cod
 
 # Domain Modeling
 
-Actively build and sharpen the project's domain model as you design. Every file this skill writes goes in the Jack folder, `.jack/`, which stays out of git (set it up per the Files you write in a repo section of `../jack-mode/references/harness.md`). Never commit one. This is the *active* discipline: challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `GLOSSARY.md` for vocabulary is not this skill: that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
+Actively build and sharpen the project's domain model as you design. The glossary and ADRs are tracked files: write them on the task's branch and commit them with the change they describe, so the next reader of the repo finds the why. This is the *active* discipline: challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `GLOSSARY.md` for vocabulary is not this skill: that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
 
 ## File structure
 
 Most repos have a single context:
 
 ```
-.jack/
-├── GLOSSARY.md
+GLOSSARY.md
+docs/
 └── adr/
     ├── 0001-event-sourced-orders.md
     └── 0002-postgres-for-write-model.md
 ```
 
-If `.jack/GLOSSARY-MAP.md` exists, the repo has multiple contexts. The map points to where each one lives:
+If `GLOSSARY-MAP.md` exists at the repo root, the repo has multiple contexts. The map points to where each one lives:
 
 ```
-.jack/
-├── GLOSSARY-MAP.md
+GLOSSARY-MAP.md
+docs/
 ├── adr/                              ← system-wide decisions
 └── contexts/
     ├── ordering/
@@ -34,9 +34,9 @@ If `.jack/GLOSSARY-MAP.md` exists, the repo has multiple contexts. The map point
         └── adr/
 ```
 
-Create files lazily: only when you have something to write. If no `.jack/GLOSSARY.md` exists, create one when the first term is resolved. If no `.jack/adr/` exists, create it when the first ADR is needed.
+Create files lazily: only when you have something to write. If no `GLOSSARY.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
 
-If the repo already tracks its own `GLOSSARY.md` or `docs/adr/`, read them as the team's model and challenge against them too. Record your terms and decisions in the Jack folder, not in those files, unless Jack asks.
+Before exploring any area, read the glossary and the ADRs that touch it. If a file doesn't exist, proceed silently. When your output contradicts an ADR, say so instead of silently overriding it: _Contradicts ADR-0007 (event-sourced orders), but worth reopening because..._
 
 ## During the session
 
@@ -58,7 +58,7 @@ When the user states how something works, check whether the code agrees. If you 
 
 ### Update the glossary inline
 
-When a term is resolved, update `.jack/GLOSSARY.md` right there. Don't batch these up: capture them as they happen. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
+When a term is resolved, update `GLOSSARY.md` right there. Don't batch these up: capture them as they happen. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
 
 `GLOSSARY.md` should be totally devoid of implementation details. Do not treat `GLOSSARY.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 

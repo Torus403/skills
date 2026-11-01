@@ -21,6 +21,9 @@ Read the **code-style** skill first. These rules add the TypeScript type rules o
 | Object parameters past three | Past three parameters, pass one object so call sites read clearly. |
 | `null` and `undefined` | Pick the one the repo uses for "no value" and use it consistently. Check it with `=== null` or `=== undefined`, not truthiness, when `0` or `""` are valid. |
 | `async` and `await` | Use `async`/`await`, not `.then()` chains. Always `await` or return a promise. Never leave one floating. |
+| Errors | Throw `Error` subclasses with a stable `code`, never strings or plain objects. Pass `{ cause }` when you wrap. Narrow `unknown` in `catch` before you use it. Map errors to responses only at the boundary, per the **code-style** skill. |
+| Assertions | Use one small `assert(condition, message): asserts condition` helper for invariants the types can't express. Never use it on outside input. |
+| Timeouts | Every `fetch` and client call gets a timeout (`AbortSignal.timeout(ms)` or the client's option), per the **principle-assume-the-call-fails** skill. |
 | Real tests | Don't mock what you can run. Use the repo's test runner and real modules. Mock only what you can't run locally. |
 | Structured logging | Use the repo's logger with enough context to debug from an id. No `console.log` in shipped code. |
 

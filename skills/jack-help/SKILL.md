@@ -24,7 +24,7 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Settle the types and module shape before code | `/architect` |
 | Find modules worth deepening in a codebase | `/improve-codebase-architecture` |
 | Get a bespoke playbook for a big, unusual task | `/figure-it-out` |
-| Set up a repo's docs layout for these skills | `/setup-repo` |
+| Set up a repo for these skills: stage, check command and CI, docs layout | `/setup-repo` |
 
 ## Understand
 
@@ -43,6 +43,9 @@ Most work starts with **`/jack-mode`** and a sentence about the task. It aligns 
 | Want to | Type |
 | --- | --- |
 | Read Jack's coding style and examples | `code-style` |
+| Build auth, secrets, input handling and data access securely | `secure-by-default` |
+| Design an HTTP, RPC or webhook API | `api-design` |
+| Get a service ready for real users: logs, metrics, alerts, rollback, runbook | `production-readiness` |
 | Build test-first | `tdd` |
 | Diagnose a hard bug or a perf regression | `diagnosing-bugs` |
 | Run N attempts at one task and keep the best parts | `/arena` |

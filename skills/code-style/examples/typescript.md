@@ -42,30 +42,48 @@ function sendInvoiceReminders(invoices: Invoice[], today: Date): void {
 ## A deep module earns its extraction
 
 ```ts
-// Write. Callers see one small function. The retries, backoff, and error mapping stay hidden behind it.
+// Write. Callers see one small function. The timeout, retries, backoff, and error mapping stay hidden behind it.
+const customerApiTimeoutMs = 2_000;
+const customerApiAttemptsMax = 3;
+const retryDelayMsBase = 200;
+
 export async function fetchCustomerProfile(customerId: string): Promise<CustomerProfile> {
   let lastError: unknown = null;
 
-  for (let attempt = 1; attempt <= maximumAttempts; attempt++) {
-    const response = await fetch(`${apiBaseUrl}/customers/${customerId}`);
+  for (let attempt = 1; attempt <= customerApiAttemptsMax; attempt++) {
+    try {
+      const response = await fetch(`${apiBaseUrl}/customers/${customerId}`, {
+        signal: AbortSignal.timeout(customerApiTimeoutMs),
+      });
 
-    if (response.ok) {
-      return parseCustomerProfile(await response.json());
+      if (response.ok) {
+        return parseCustomerProfile(await response.json());
+      }
+
+      if (response.status === 404) {
+        throw new NotFoundError(`Customer ${customerId} not found`);
+      }
+
+      if (response.status < 500 && response.status !== 429) {
+        throw new Error(`Customer API returned ${response.status}`);
+      }
+
+      lastError = new Error(`Customer API returned ${response.status}`);
+    } catch (error) {
+      if (!isNetworkOrTimeoutError(error)) {
+        throw error;
+      }
+      lastError = error;
     }
 
-    if (response.status === 404) {
-      throw new CustomerNotFoundError(customerId);
-    }
-
-    lastError = new Error(`Customer API returned ${response.status}`);
-    await waitMilliseconds(attempt * retryDelayMilliseconds);
+    await waitMs(retryDelayWithJitterMs(attempt, retryDelayMsBase));
   }
 
-  throw lastError;
+  throw new UnavailableError("Customer API failed after retries", { cause: lastError });
 }
 ```
 
-`parseCustomerProfile` and `waitMilliseconds` are reused across the module, so they stay separate. A wrapper that only renamed `fetch` would not.
+`parseCustomerProfile`, `isNetworkOrTimeoutError`, `waitMs`, and `retryDelayWithJitterMs` are reused across the module, so they stay separate. A wrapper that only renamed `fetch` would not. A read is safe to retry. A write needs an idempotency key first (the **principle-assume-the-call-fails** skill).
 
 ## Guard clauses and the main path
 
@@ -177,18 +195,107 @@ function findCustomerAccount(customerId: string): CustomerAccount | undefined {
 // Loop over the line items
 for (const lineItem of order.lineItems) {
   // Add the price to the total
-  orderTotal += lineItem.price * lineItem.quantity;
+  orderTotalInCents += lineItem.priceInCents * lineItem.quantity;
 }
 ```
 
 ```ts
 // Write. No comment where the code is clear. One comment where the reason is not.
 for (const lineItem of order.lineItems) {
-  orderTotal += lineItem.price * lineItem.quantity;
+  orderTotalInCents += lineItem.priceInCents * lineItem.quantity;
 }
 
-// The payment provider rejects amounts with more than two decimal places.
-const chargeAmount = Math.round(orderTotal * 100) / 100;
+// The payment provider rejects charges below its minimum, so we waive them.
+const chargeInCents = orderTotalInCents < providerMinimumChargeInCents ? 0 : orderTotalInCents;
+```
+
+## Assert what the types can't say
+
+```ts
+export function assert(condition: boolean, message: string): asserts condition {
+  if (!condition) {
+    throw new Error(`Assertion failed: ${message}`);
+  }
+}
+```
+
+```ts
+// Write. The type says a number. The assertion says what the number must be.
+function applyRefund(invoice: Invoice, refundInCents: number): Invoice {
+  assert(refundInCents > 0, `refund must be positive, got ${refundInCents}`);
+  assert(refundInCents <= invoice.paidInCents, `refund ${refundInCents} exceeds paid ${invoice.paidInCents}`);
+
+  const refundedInvoice = { ...invoice, paidInCents: invoice.paidInCents - refundInCents };
+
+  assert(refundedInvoice.paidInCents >= 0, "paid amount went negative");
+  return refundedInvoice;
+}
+```
+
+## Every limit is a named constant
+
+```ts
+// Avoid. Reads every page the API returns, however many there are.
+let cursor: string | null = null;
+do {
+  const page = await listOrders({ cursor });
+  orders.push(...page.orders);
+  cursor = page.nextCursor;
+} while (cursor !== null);
+```
+
+```ts
+// Write. The limit has a name and a unit, and hitting it is an error, not a silent cut.
+const orderPagesMax = 100;
+
+let cursor: string | null = null;
+for (let pageNumber = 1; pageNumber <= orderPagesMax; pageNumber++) {
+  const page = await listOrders({ cursor });
+  orders.push(...page.orders);
+  cursor = page.nextCursor;
+
+  if (cursor === null) {
+    return orders;
+  }
+}
+
+throw new Error(`Orders exceeded ${orderPagesMax} pages`);
+```
+
+## Errors translated at the boundary
+
+```ts
+// Avoid. The error disappears, and the caller gets an empty list as if nothing went wrong.
+try {
+  return await loadInvoices(customerId);
+} catch (error) {
+  logger.error({ error }, "failed to load invoices");
+  return [];
+}
+```
+
+```ts
+// Write. Domain code throws a kind. The HTTP handler maps each kind once.
+export class NotFoundError extends Error {
+  readonly code = "not_found";
+}
+
+export class InvalidInputError extends Error {
+  readonly code = "invalid_input";
+}
+
+function errorResponse(error: unknown): Response {
+  if (error instanceof NotFoundError) {
+    return Response.json({ error: { code: error.code, message: error.message } }, { status: 404 });
+  }
+
+  if (error instanceof InvalidInputError) {
+    return Response.json({ error: { code: error.code, message: error.message } }, { status: 400 });
+  }
+
+  logger.error({ error }, "unhandled error");
+  return Response.json({ error: { code: "internal", message: "Something went wrong" } }, { status: 500 });
+}
 ```
 
 ## Plain functions over classes

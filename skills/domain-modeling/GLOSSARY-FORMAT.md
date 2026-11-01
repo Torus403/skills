@@ -31,18 +31,18 @@ _Avoid_: Client, buyer, account
 
 ## Single vs multi-context repos
 
-**Single context (most repos):** One `.jack/GLOSSARY.md`.
+**Single context (most repos):** One `GLOSSARY.md` at the repo root.
 
-**Multiple contexts:** A `.jack/GLOSSARY-MAP.md` lists the contexts, where they live, and how they relate to each other:
+**Multiple contexts:** A `GLOSSARY-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
 
 ```md
 # Glossary Map
 
 ## Contexts
 
-- [Ordering](./contexts/ordering/GLOSSARY.md): receives and tracks customer orders
-- [Billing](./contexts/billing/GLOSSARY.md): generates invoices and processes payments
-- [Fulfillment](./contexts/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
+- [Ordering](./docs/contexts/ordering/GLOSSARY.md): receives and tracks customer orders
+- [Billing](./docs/contexts/billing/GLOSSARY.md): generates invoices and processes payments
+- [Fulfillment](./docs/contexts/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
 
 ## Relationships
 
@@ -53,8 +53,8 @@ _Avoid_: Client, buyer, account
 
 The skill infers which structure applies:
 
-- If `.jack/GLOSSARY-MAP.md` exists, read it to find contexts
-- If only `.jack/GLOSSARY.md` exists, single context
-- If neither exists, create `.jack/GLOSSARY.md` lazily when the first term is resolved
+- If `GLOSSARY-MAP.md` exists, read it to find contexts
+- If only `GLOSSARY.md` exists, single context
+- If neither exists, create `GLOSSARY.md` lazily when the first term is resolved
 
 When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.

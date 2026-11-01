@@ -19,6 +19,9 @@ Read the **code-style** skill first. These rules add the Python rules on top of 
 | No `Any` | Avoid `typing.Any`. Use a real type, or `object` for data you haven't parsed yet. |
 | No mutable defaults | Never `def f(items=[])`. Use `None` and create the list inside, or an immutable default such as `()`. |
 | Narrow exceptions | Catch the specific exception you can handle. No bare `except:` and no `except Exception: pass`. Re-raise with `raise ... from error` to keep the cause. |
+| Errors | Raise exception subclasses with a stable `code` attribute. Map them to responses only at the boundary, per the **code-style** skill. |
+| Assertions | Plain `assert` for invariants the types can't express. `python -O` strips them, so never use `assert` on outside input. |
+| Timeouts | Every HTTP, database, and queue call passes a timeout. `requests` and `httpx` calls without one can hang forever. See the **principle-assume-the-call-fails** skill. |
 | Resources in `with` | Files, locks, and connections open in a `with` block. Use `pathlib.Path` for paths. |
 | Keyword arguments | Past three parameters, make the rest keyword-only (`*,`) so call sites read clearly. |
 | Real tests | Use `pytest`. Don't mock what you can run: use `tmp_path`, a real test database, and the real code. Mock only what you can't run locally. |

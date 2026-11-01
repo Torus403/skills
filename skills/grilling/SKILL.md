@@ -13,7 +13,7 @@ When there is a codebase, sweep it before round one. Dispatch a read-only sub-ag
 
 - Code that does the same kind of thing: sibling features, the same layer in another module, and the tests around them.
 - How similar changes were made: `git log` on those files, and past commit and PR messages.
-- The written rules: `AGENTS.md`, `CLAUDE.md`, lint config, ADRs, specs, and the Jack folder (`.jack/`).
+- The written rules: `AGENTS.md`, `CLAUDE.md`, lint config, `GLOSSARY.md`, ADRs in `docs/adr/`, specs, and the Jack folder (`.jack/`).
 
 It returns a **precedent map**: for each part of the task, the closest existing example with `file:line`, and every place the codebase does the same thing two ways. Sweep again whenever an answer opens a part of the tree the map does not cover.
 
@@ -33,7 +33,8 @@ These are always judgement calls, whatever the precedent says:
 - **Data models and database design.** Propose the full shape: every table or model, every column with its type, nullability, keys, and indexes, the relations, and why each one is needed. Show which existing model you copied it from. The user reviews and approves every model before you build.
 - **Anything a user sees or reads.** Pages, views, components, emails, notifications, copy, and error messages. Propose and recommend, then wait for the user's approval.
 - **Product behavior and scope.** What the feature does, its edge cases, and what is out.
-- **Hard-to-undo steps.** Migrations that drop or rewrite data, public APIs, and anything shipped outside the repo. Ask, but recommend the migration or contract change when it gives the cleaner design. Never steer away from one only because it is a migration.
+- **Hard-to-undo steps.** Migrations that drop or rewrite data, public APIs, and anything shipped outside the repo. In a pre-launch repo, ask, but recommend the migration or contract change when it gives the cleaner design, and never steer away from one only because it is a migration. In a launched repo (`Stage: launched` in the repo's Agent setup section), recommend expand, migrate, contract and the rollback.
+- **Who can do what.** For anything touching auth, money, user data, uploads, outbound requests, or secrets: who can call it, what each caller may see or change, and the worst a hostile caller could do. Recommend the answer from the **secure-by-default** skill.
 - **Conflicting precedent.** Where the codebase does it two ways, picking one is a convention decision.
 
 When unsure whether something is your call, ask it.

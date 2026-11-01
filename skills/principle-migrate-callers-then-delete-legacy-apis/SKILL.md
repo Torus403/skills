@@ -9,6 +9,6 @@ disable-model-invocation: true
 - Update tests to assert the new contract, and delete tests that only protect pre-refactor implementation details
 
 **When this applies:**
-- No external users depend on backward compatibility
+- No external users depend on backward compatibility. In a launched repo, stored data and public contracts have outside users: change them with expand, migrate, contract, per the Standing rules in `../jack-mode/SKILL.md`.
 - The project can absorb coordinated breaking changes
 - The new API is part of a simplification or refactor initiative
