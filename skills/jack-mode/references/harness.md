@@ -66,7 +66,7 @@ To present a finished plan or design for approval in plan mode, use `ExitPlanMod
 
 ## Files you write in a repo
 
-Nothing these skills write into a repo is tracked by git or reaches GitHub. The code change a task asks for is the one exception: it ships on its branch as usual. Commit any other file only when Jack asks for that file by name.
+Nothing these skills write into a repo is tracked by git or reaches GitHub, with a few exceptions that ship on the task's branch as usual: the code change the task asks for, and the tracked docs in the table below (ADRs, the glossary, the runbook, and the Agent setup section). Commit any other file only when Jack asks for that file by name.
 
 Everything else goes in the **Jack folder**: `.jack/` at the root of the repo's main checkout. Before the first write in a session, run this from anywhere in the repo:
 
@@ -82,18 +82,24 @@ grep -qxF '/.jack/' "$common/info/exclude" 2>/dev/null || echo '/.jack/' >> "$co
 | File | Path |
 | --- | --- |
 | Spec | `.jack/specs/<feature>.md` |
-| ADR | `.jack/adr/NNNN-slug.md` |
-| Glossary | `.jack/GLOSSARY.md`. For several contexts, `.jack/GLOSSARY-MAP.md` plus `.jack/contexts/<context>/GLOSSARY.md` and `.jack/contexts/<context>/adr/` |
-| How skills read the domain docs | `.jack/domain.md` |
 | Decision log | `.jack/audit/<task-slug>.tsv` |
 | Wizard, one-off script, notes | `.jack/scratch/<task-slug>/` |
 | Prototype, evidence, screenshots | The OS temp dir as the skill says, or `.jack/scratch/<task-slug>/` when it must sit beside the code |
 
 A generated project skill has to sit where the harness loads it: `.claude/skills/<name>/` and its `.agents/skills/<name>` symlink. Add both to the same exclude file with the same `grep -qxF ... || echo ...` line, as `/.claude/skills/<name>/` and `/.agents/skills/<name>`.
 
-The repo's tracked docs (`GLOSSARY.md`, `docs/adr/`, `docs/specs/`, `CLAUDE.md`, `AGENTS.md`) belong to the repo's team. Read them alongside the Jack folder, and where the two disagree, say so. Never edit or add to them unless Jack asks. A convention line Jack approves in a grilling plan counts as asking.
+Tracked files outside the Jack folder:
 
-Before every commit, run `git status --porcelain` and confirm that only the task's code is staged.
+| File | Path | Who writes it |
+| --- | --- | --- |
+| ADR | `docs/adr/NNNN-slug.md` | The **domain-modeling** skill, committed with the change |
+| Glossary | `GLOSSARY.md`. For several contexts, `GLOSSARY-MAP.md` plus `docs/contexts/<context>/GLOSSARY.md` and `docs/contexts/<context>/adr/` | The **domain-modeling** skill, committed with the change |
+| Runbook | `docs/runbook.md` | The **production-readiness** skill, committed with the change |
+| Agent setup (stage, check command, docs layout) | An `## Agent setup` section in `AGENTS.md`, or `CLAUDE.md` when the repo has no `AGENTS.md` | The **setup-repo** skill, once Jack approves it |
+
+Every other tracked doc (`docs/specs/`, the rest of `CLAUDE.md` and `AGENTS.md`) belongs to the repo. Read it alongside the Jack folder, and where the two disagree, say so. Never edit or add to it unless Jack asks. A convention line Jack approves in a grilling plan counts as asking.
+
+Before every commit, run `git status --porcelain` and confirm that only the task's code and those tracked docs are staged.
 
 A cloud session starts from a fresh clone, so its Jack folder starts empty and goes away with the session. Put anything Jack should keep in the reply, or in the session's shared or persistent folder if it has one.
 

@@ -38,26 +38,42 @@ def send_invoice_reminders(invoices: list[Invoice], today: date) -> None:
 ## A deep module earns its extraction
 
 ```python
-# Write. Callers see one small function. The retries, backoff, and error mapping stay hidden behind it.
-def fetch_customer_profile(customer_id: str) -> CustomerProfile:
-    last_error = None
+# Write. Callers see one small function. The timeout, retries, backoff, and error mapping stay hidden behind it.
+CUSTOMER_API_TIMEOUT_SECONDS = 2.0
+CUSTOMER_API_ATTEMPTS_MAX = 3
+RETRY_DELAY_SECONDS_BASE = 0.2
 
-    for attempt in range(1, MAXIMUM_ATTEMPTS + 1):
-        response = http_client.get(f"{API_BASE_URL}/customers/{customer_id}")
+
+def fetch_customer_profile(customer_id: str) -> CustomerProfile:
+    last_error: Exception | None = None
+
+    for attempt in range(1, CUSTOMER_API_ATTEMPTS_MAX + 1):
+        try:
+            response = http_client.get(
+                f"{API_BASE_URL}/customers/{customer_id}",
+                timeout=CUSTOMER_API_TIMEOUT_SECONDS,
+            )
+        except (httpx.TimeoutException, httpx.NetworkError) as error:
+            last_error = error
+            time.sleep(retry_delay_with_jitter_seconds(attempt, RETRY_DELAY_SECONDS_BASE))
+            continue
 
         if response.status_code == 200:
             return parse_customer_profile(response.json())
 
         if response.status_code == 404:
-            raise CustomerNotFoundError(customer_id)
+            raise NotFoundError(f"Customer {customer_id} not found")
+
+        if response.status_code < 500 and response.status_code != 429:
+            raise RuntimeError(f"Customer API returned {response.status_code}")
 
         last_error = RuntimeError(f"Customer API returned {response.status_code}")
-        time.sleep(attempt * RETRY_DELAY_SECONDS)
+        time.sleep(retry_delay_with_jitter_seconds(attempt, RETRY_DELAY_SECONDS_BASE))
 
-    raise RuntimeError(f"Customer API failed after {MAXIMUM_ATTEMPTS} attempts") from last_error
+    raise UnavailableError("Customer API failed after retries") from last_error
 ```
 
-`parse_customer_profile` is reused across the module, so it stays separate. A wrapper that only renamed `http_client.get` would not.
+`parse_customer_profile` and `retry_delay_with_jitter_seconds` are reused across the module, so they stay separate. A wrapper that only renamed `http_client.get` would not. A read is safe to retry. A write needs an idempotency key first (the **principle-assume-the-call-fails** skill).
 
 ## Guard clauses and the main path
 
@@ -168,16 +184,93 @@ def find_customer_account(customer_id: str) -> CustomerAccount | None:
 # Loop over the line items
 for line_item in order.line_items:
     # Add the price to the total
-    order_total += line_item.price * line_item.quantity
+    order_total_in_cents += line_item.price_in_cents * line_item.quantity
 ```
 
 ```python
 # Write. No comment where the code is clear. One comment where the reason is not.
 for line_item in order.line_items:
-    order_total += line_item.price * line_item.quantity
+    order_total_in_cents += line_item.price_in_cents * line_item.quantity
 
-# The payment provider rejects amounts with more than two decimal places.
-charge_amount = round(order_total, 2)
+# The payment provider rejects charges below its minimum, so we waive them.
+charge_in_cents = 0 if order_total_in_cents < PROVIDER_MINIMUM_CHARGE_IN_CENTS else order_total_in_cents
+```
+
+## Assert what the types can't say
+
+```python
+# Write. The type says an int. The assertions say what the int must be.
+def apply_refund(invoice: Invoice, refund_in_cents: int) -> Invoice:
+    assert refund_in_cents > 0, f"refund must be positive, got {refund_in_cents}"
+    assert refund_in_cents <= invoice.paid_in_cents, f"refund {refund_in_cents} exceeds paid {invoice.paid_in_cents}"
+
+    refunded_invoice = replace(invoice, paid_in_cents=invoice.paid_in_cents - refund_in_cents)
+
+    assert refunded_invoice.paid_in_cents >= 0, "paid amount went negative"
+    return refunded_invoice
+```
+
+Python drops `assert` under `python -O`. Never use one to check outside input: that is the boundary's job, with a real exception.
+
+## Every limit is a named constant
+
+```python
+# Avoid. Reads every page the API returns, however many there are.
+cursor = None
+while True:
+    page = list_orders(cursor=cursor)
+    orders.extend(page.orders)
+    cursor = page.next_cursor
+    if cursor is None:
+        break
+```
+
+```python
+# Write. The limit has a name, and hitting it is an error, not a silent cut.
+ORDER_PAGES_MAX = 100
+
+cursor = None
+for _ in range(ORDER_PAGES_MAX):
+    page = list_orders(cursor=cursor)
+    orders.extend(page.orders)
+    cursor = page.next_cursor
+
+    if cursor is None:
+        return orders
+
+raise RuntimeError(f"Orders exceeded {ORDER_PAGES_MAX} pages")
+```
+
+## Errors translated at the boundary
+
+```python
+# Avoid. The error disappears, and the caller gets an empty list as if nothing went wrong.
+try:
+    return load_invoices(customer_id)
+except Exception:
+    logger.exception("failed to load invoices")
+    return []
+```
+
+```python
+# Write. Domain code raises a kind. The HTTP handler maps each kind once.
+class NotFoundError(Exception):
+    code = "not_found"
+
+
+class InvalidInputError(Exception):
+    code = "invalid_input"
+
+
+def error_response(error: Exception) -> JSONResponse:
+    if isinstance(error, NotFoundError):
+        return JSONResponse({"error": {"code": error.code, "message": str(error)}}, status_code=404)
+
+    if isinstance(error, InvalidInputError):
+        return JSONResponse({"error": {"code": error.code, "message": str(error)}}, status_code=400)
+
+    logger.exception("unhandled error")
+    return JSONResponse({"error": {"code": "internal", "message": "Something went wrong"}}, status_code=500)
 ```
 
 ## Plain functions over classes

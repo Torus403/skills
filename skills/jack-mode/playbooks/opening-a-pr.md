@@ -8,10 +8,10 @@ Invoked at the end of every other playbook that changes code.
 
 **Review waterfall.** Before the PR opens, run these gates in order, one todo item each. A gate passes when its checks are green and every finding that holds up is fixed. Never start a gate before the one above it passes.
 
-1. **Clean.** The **deslop** skill over the diff, then the **no-comments** skill. The diff holds only the task's code: no spec, ADR, glossary, log, note, or generated skill (see Files you write in a repo in `../references/harness.md`).
+1. **Clean.** The **deslop** skill over the diff, then the **no-comments** skill. The diff holds only the task's code, plus any ADR, glossary term, or runbook entry the task created: no spec, log, note, or generated skill (see Files you write in a repo in `../references/harness.md`).
 2. **Architecture.** The **spec-review** skill. The diff builds the agreed plan in the agreed shape and follows the repo's written standards. A wrong shape goes back to the design step of the calling playbook, not to a patch.
-3. **Mechanical.** The repo's own format, lint, typecheck, and build commands, from `CLAUDE.md`, `AGENTS.md`, the package scripts, or the CI config. Zero errors and no new warnings. Never disable a rule or add an ignore to pass.
-4. **Rules.** The `style-reviewer` subagent, for Jack's style and the language's best practices.
+3. **Mechanical.** The repo's check command from its `## Agent setup` section (the **setup-repo** skill). Without one, its own format, lint, typecheck, build, and audit commands, from `CLAUDE.md`, `AGENTS.md`, the package scripts, or the CI config. Zero errors and no new warnings. Never disable a rule or add an ignore to pass.
+4. **Rules.** The `style-reviewer` subagent, for Jack's style and the language's best practices. When the diff touches a **secure-by-default** trigger, walk that skill's checklist over the diff too, and when it changes an API, the **api-design** skill's.
 5. **Tests.** The repo's existing test suite is green. Add no tests unless Jack asked for them (Standing rules in `../SKILL.md`). A test that broke because the behavior changed on purpose is updated or deleted in this PR. Never skip or loosen a test to hide a real bug. When Jack did ask for tests, each new behavior has one that fails without the change, per **principle-test-behavior-not-implementation**.
 6. **Live.** The change works on the real surface at the current head, through the **control-ui** or **control-cli** skill, with the **verify-this** skill for a load-bearing claim. Write `n/a: <reason>` only when the change has no runtime surface, such as docs or skills.
 7. **Deep review.** The **thermos** skill, for bugs, security, breakage, and maintainability.
@@ -32,9 +32,9 @@ A fix sends you back up. A fix that changes the shape restarts at gate 2, and an
 - `## What changed`: 1 to 5 short bullets. Name a real symbol or path only when it carries the change.
 - `## Evidence`: before and after. Screenshots for a visual change. Otherwise the repro or command that failed and now passes, or the real run and its output.
 - `## Tradeoffs`: only alternatives a reviewer would otherwise ask about. Skip when there was no real choice.
-- `## Blast Radius`: one-way or two-way door, then 1 to 2 sentences on who or what it touches and why that is safe or risky. Name every migration and API contract change.
+- `## Blast Radius`: one-way or two-way door, then 1 to 2 sentences on who or what it touches and why that is safe or risky. Name every migration and API contract change. In a launched repo, add how to roll it back and whether its data changes can be undone. Name the check that covers each **secure-by-default** trigger the diff touches.
 
-The spec and ADRs live in the untracked Jack folder, so never link them. Put what a reviewer needs from them in the body. The body becomes the squash commit body, so keep it under about 40 lines.
+The spec lives in the untracked Jack folder, so never link it. Put what a reviewer needs from it in the body. Link an ADR in `docs/adr/` when the PR adds or changes one. The body becomes the squash commit body, so keep it under about 40 lines.
 
 **Open it.** Use `gh pr create`, ready, never a draft. Run `gh pr view <number>` before you refer to PR status.
 

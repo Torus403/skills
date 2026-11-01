@@ -94,6 +94,17 @@ Good interfaces make testing natural:
 
 3. **Small surface area.** Fewer methods = fewer tests needed. Fewer params = simpler test setup.
 
+## Project layout
+
+In an existing repo, follow its layout (the **principle-align-with-existing-practices** skill). For a new repo or a new top-level area, use this shape:
+
+- **Group by feature or domain, not by layer.** `billing/`, `orders/`, `accounts/`, each holding its own types, logic, storage, and handlers. Avoid `controllers/`, `services/`, `models/` at the top, which scatter one feature across the tree.
+- **Keep the tree shallow.** Two or three levels. A folder with one file is a smell.
+- **Imports point inward.** Domain logic never imports a framework, an HTTP client, a database driver, or an adapter. Adapters import the domain. This keeps the logic pure and testable (the **principle-boundary-discipline** skill).
+- **One adapter folder per outside system.** `stripe/`, `email/`, `storage/`. The rest of the code talks to its interface, never to the vendor SDK directly.
+- **Private code is marked.** An `internal/` folder, or a leading `_` in Python, for code other features must not import. Enforce it with a lint rule when the repo has one (`import/no-restricted-paths`, `import-linter`).
+- **Entry points are thin.** `main`, route files, CLI commands, and job runners parse input, call the domain, and translate the result. No business rules there.
+
 ## Relationships
 
 - A **Module** has exactly one **Interface** (the surface it presents to callers and tests).

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Principle Assume the Call Fails"
+  short_description: "Timeouts, safe retries with jitter, idempotency keys, bounded queues"
+policy:
+  allow_implicit_invocation: false

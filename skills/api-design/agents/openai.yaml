@@ -1,0 +1,3 @@
+interface:
+  display_name: "API Design"
+  short_description: "Stripe-style conventions for HTTP, RPC, and webhook APIs"

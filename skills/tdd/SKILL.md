@@ -10,7 +10,7 @@ Merged from Matt Pocock's `tdd` (the loop and what makes a good test) and pstack
 
 TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
 
-When exploring the codebase, read the glossary (`.jack/GLOSSARY.md`, or the repo's tracked `GLOSSARY.md`) if it exists so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+When exploring the codebase, read the glossary (`GLOSSARY.md`) if it exists so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
 
 ## What a good test is
 
@@ -27,6 +27,15 @@ A **seam** is the public boundary you test at: the interface where you observe b
 Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
 When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
+
+## Where testing effort goes first
+
+When tests are asked for, propose seams in this order. Under jack-mode none of this runs until Jack asks for tests.
+
+1. **What running the product can't show.** Money moving, auth and permission checks (each role allowed, each role refused), data loss or corruption, and idempotency under a repeated request. These fail silently, and they cost the most when they slip.
+2. **Parsers and pure logic.** Use a property-based test (`fast-check` in TypeScript, `hypothesis` in Python) when the repo has the library or Jack approves adding it. State a property that holds for every input (parse then serialize returns the input, a total never goes negative) and let the library find the counterexample.
+3. **Failure paths.** A timeout, a 500, a duplicate delivery, and a partial write each leave the system in a legal state.
+4. Everything else, only where a seam is cheap.
 
 ## Anti-patterns
 

@@ -10,7 +10,7 @@ Specs are for big things only: a new feature, core logic, or an architecture cha
 
 ## Process
 
-1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching. Read `.jack/domain.md` if it exists.
+1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching. Read the repo's `AGENTS.md` or `CLAUDE.md`, including its Agent setup section if it has one.
 
 2. Only when the user asked for tests in this work, sketch the seams at which you're going to test the feature. Prefer existing seams to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better. The ideal number is one.
 

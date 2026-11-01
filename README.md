@@ -7,8 +7,8 @@ Jack's agent skills for Claude Code and Codex. They are built from [pstack](http
 - **Align first.** Match how the codebase already does things before inventing anything.
 - **Plan deeply, up front.** The agent grills Jack with questions and recommendations until nothing is left to guess, then builds to the end without stopping.
 - **Simple wins.** The least fancy design with the fewest moving parts and the least logic, with no bugs, crashes, or surprises.
-- **Docs only for big things.** Specs for new features, core logic, and architecture go in `.jack/specs/`. Architecture decisions go in `.jack/adr/`. Small work gets none.
-- **Nothing extra in git.** Every file the skills write into a repo, other than the task's code, goes in the repo's `.jack/` folder. The skills keep it out of git with `.git/info/exclude`, so it never shows on GitHub and the repo's `.gitignore` stays untouched.
+- **Docs only for big things.** Specs for new features, core logic, and architecture go in `.jack/specs/`. Architecture decisions go in `docs/adr/` and domain terms in `GLOSSARY.md`, both committed with the change. Small work gets none.
+- **Little extra in git.** Every file the skills write into a repo, other than the task's code, its ADRs, and the glossary, goes in the repo's `.jack/` folder. The skills keep it out of git with `.git/info/exclude`, so it never shows on GitHub and the repo's `.gitignore` stays untouched.
 - **Everything is a PR.** Branch `type/short-desc`, Conventional Commits, a conventional PR title. A feature is one big PR. Squash-merged, and only when Jack says so.
 - **Plain, readable code.** Deep modules, inlined single-use helpers, long descriptive names, blank lines between steps, and almost no comments. The **code-style** skill holds the rules and examples.
 - **Verified for real.** The change runs the way a user would run it before anyone calls it done.
