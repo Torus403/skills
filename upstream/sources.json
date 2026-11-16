@@ -5,14 +5,14 @@
       "repo": "cursor/plugins",
       "branch": "main",
       "path": "pstack",
-      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7"
     },
     {
       "folder": "pstack-claude-code-harness",
       "repo": "cursor/plugins",
       "branch": "main",
       "path": "harness/pstack",
-      "commit": "1ba91fc25c0977741dd0e267849e6234b037ed0a"
+      "commit": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7"
     },
     {
       "folder": "thermos",
@@ -33,7 +33,7 @@
       "repo": "mattpocock/skills",
       "branch": "main",
       "path": "",
-      "commit": "a496f5513d4a4cf889bc48e189e579f4b0bdf6aa"
+      "commit": "5863806dd4e15c63174bee4e7515a4256792ecfa"
     },
     {
       "folder": "vercel-react-best-practices",
